@@ -1,0 +1,28 @@
+.home {
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  position: relative;
+
+  .copy {
+    text-align: center;
+    position: absolute;
+    bottom: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+
+    @media screen and (min-width: 992px) {
+      h1 {
+        font-size: 48px;
+      }
+    }
+  }
+
+  .pizza {
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

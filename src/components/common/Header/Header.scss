@@ -1,0 +1,36 @@
+header {
+  height: 80px;
+  display: flex;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+  }
+
+  .header-logo {
+    height: 50px;
+    object-fit: contain;
+    flex-grow: 0;
+  }
+
+  .nav {
+    display: hidden;
+    list-style: none;
+  }
+
+  .nav-item {
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .nav {
+      display: flex;
+      gap: 20px;
+    }
+  }
+}
