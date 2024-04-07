@@ -1,4 +1,6 @@
 .builder {
+  position: relative;
+
   .ingredient-radio {
     color: #fff;
   }
@@ -6,4 +8,18 @@
   .cta {
     text-align: center;
   }
+
+  .pizza-container {
+    position: sticky;
+    top: 80px;
+  }
 }
+
+// .alert-container {
+//   position: absolute;
+//   top: 80px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 100%;
+//   z-index: 1;
+// }

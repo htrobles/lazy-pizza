@@ -12,9 +12,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <main>
         <Header />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+        <div className='content'>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </div>
       </main>
     </ThemeProvider>
   );
