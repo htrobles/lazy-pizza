@@ -8,7 +8,7 @@ export default function Home() {
       <div className='copy'>
         <h1>We can't do everything for you</h1>
         <a href='/build'>
-          <Button>BUILD YOUR OWN PIZZA</Button>
+          <Button color='#E15C31'>BUILD YOUR OWN PIZZA</Button>
         </a>
       </div>
       <img className='pizza' src='/pizza-top-view.png' alt='Delicious pizza' />
