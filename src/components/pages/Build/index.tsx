@@ -10,7 +10,7 @@ export default function Build() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        <Grid item xs={1} md={6}>
+        <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
           <Box className='pizza-container' mb={5}>
             <img className='pizza' src='/builder/crust.png' alt='pizza crust' />
           </Box>
@@ -25,7 +25,7 @@ export default function Build() {
             </Button>
           </div>
         </Grid>
-        <Grid item xs={1} md={6}>
+        <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>
           <h1 className='mb-5'>
             Go on then.
             <br />

@@ -10,10 +10,12 @@ import theme from './theme';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <main>
+        <Header />
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </main>
     </ThemeProvider>
   );
 }
