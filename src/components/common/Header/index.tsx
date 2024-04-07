@@ -35,7 +35,7 @@ export default function Header() {
         </a>
         <ul className='nav'>
           {navLinks.map(({ href, label }) => (
-            <li className='nav-item'>
+            <li key={label} className='nav-item'>
               <a key={href} href={href}>
                 {label}
               </a>
