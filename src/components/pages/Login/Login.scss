@@ -1,0 +1,91 @@
+.login {
+    height: calc(100vh - 80px);
+    overflow-y: hidden;
+    overflow-x: auto;
+    position: relative;
+
+    .orangeBox {
+        background-color: #E15C31;
+        height: 500px;
+        max-height: 500px;
+        max-width: 400px;
+        border-radius: 16px;
+        position: relative;
+        padding: 20px;
+        margin-left: 650px; // Move the box to the right initially
+    }
+
+    .header {
+        margin-top: 10px;
+
+        h1 {
+            margin: 0;
+            font-family: 'Bebas Neue';
+            font-size: 50px;
+        }
+    }
+
+    .subHeader {
+        margin-top: 0px;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .form-input-email {
+        margin-top: 130px;
+        margin-bottom: 10px;
+    }
+
+    .form-input {
+        margin-bottom: 20px;
+    }
+
+    .pizzaIcon {
+        width: 400px;
+        z-index: +1;
+        position: absolute;
+        top: +30px;
+        right: -150px;
+    }
+
+    .customTextField {
+        .MuiFilledInput-root {
+            background-color: white; // Change the background color as per your requirement
+        }
+
+        // Change background color on hover and focus
+        .MuiFilledInput-root:hover,
+        .MuiFilledInput-root:focus {
+            background-color: rgb(241, 240, 240); // Change the background color on hover and focus
+            color: black;
+        }
+
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .login-button {
+        align-self: flex-end;
+    }
+
+
+    .pizza-bg {
+        z-index: -1;
+        height: 140vh;
+        position: absolute;
+        top: 0%;
+        left: 40%;
+        transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+
+        // Adjust breakpoint as needed for tablet size
+        .orangeBox {
+            margin: 0 auto; // Center the box horizontally for smaller screens
+        }
+    }
+
+}
