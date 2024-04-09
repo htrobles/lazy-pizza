@@ -4,6 +4,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import PasswordIcon from '@mui/icons-material/Password';
 import './Login.scss';
 import { Button, InputAdornment, TextField } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 export default function Login() {
 
@@ -64,9 +65,18 @@ export default function Login() {
                   }}
                 />
               </div>
-              <Button sx={{ bgcolor: 'white', color: 'black', '&:hover': { bgcolor: 'lightgray' } }} variant='contained' size='large'>
+              <Button sx={{ 
+                width:'100%', 
+                bgcolor: 'white', 
+                color: '#E15C31', 
+                '&:hover': { bgcolor: 'lightgray' } 
+                }} 
+                variant='contained' size='large'>
                 Login
               </Button>
+              <div className='bottomText'>
+                <h5>New Here? <NavLink to='/register'> Create an Account  </NavLink></h5>
+              </div>
             </form>
           </div>
 
