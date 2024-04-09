@@ -34,28 +34,79 @@
         }
     }
 
-    .bottomText {
-        margin-top: 16px;
-        align-content: center;
-        justify-content: center;
+    .form {
+        text-align: center;
+        .bottomText {
+            margin-top: 16px;
+            align-content: center;
+            justify-content: center;
 
-        h5 {
-            margin: 0;
-            align-items: center;
-            text-align: center;
-            font-weight: 600;
+            h5 {
+                margin: 0;
+                align-items: center;
+                text-align: center;
+                font-weight: 600;
+            }
         }
+
+        .form-input-email {
+            margin-top: 130px;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            margin-bottom: 20px;
+        }
+
+        .customTextField {
+            .MuiFilledInput-root {
+                background-color: white; // Change the background color as per your requirement
+            }
+
+            // Change background color on hover and focus
+            .MuiFilledInput-root:hover,
+            .MuiFilledInput-root:focus {
+                background-color: rgb(241, 240, 240); // Change the background color on hover and focus
+                color: black;
+            }
+
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-button {
+            align-self: center;
+            margin-top: 20px;
+            width: 80%;
+            background-color: white;
+            border-bottom: 2px solid black;
+            color: #E15C31;
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-size: 16px;
+
+            &:hover {
+                background-color: black;
+                border-bottom: 2px solid white;
+                letter-spacing: 4px;
+            }
+        }
+
+        .link {
+            color: white;
+            font-weight: 400;
+            text-decoration: underline;
+
+            &:hover {
+                color: black;
+                letter-spacing: 2px;
+            }
+        }
+
     }
 
 
-    .form-input-email {
-        margin-top: 130px;
-        margin-bottom: 10px;
-    }
 
-    .form-input {
-        margin-bottom: 20px;
-    }
 
     .pizzaIcon {
         width: 400px;
@@ -65,25 +116,6 @@
         right: -150px;
     }
 
-    .customTextField {
-        .MuiFilledInput-root {
-            background-color: white; // Change the background color as per your requirement
-        }
-
-        // Change background color on hover and focus
-        .MuiFilledInput-root:hover,
-        .MuiFilledInput-root:focus {
-            background-color: rgb(241, 240, 240); // Change the background color on hover and focus
-            color: black;
-        }
-
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .login-button {
-        align-self: flex-end;
-    }
 
 
     .pizza-bg {
@@ -91,7 +123,7 @@
         height: 140vh;
         position: absolute;
         top: 0%;
-        left: 40%;
+        left: 45%;
         transform: translateX(-50%);
     }
 

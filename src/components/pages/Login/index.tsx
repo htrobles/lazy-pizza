@@ -65,17 +65,12 @@ export default function Login() {
                   }}
                 />
               </div>
-              <Button sx={{ 
-                width:'100%', 
-                bgcolor: 'white', 
-                color: '#E15C31', 
-                '&:hover': { bgcolor: 'lightgray' } 
-                }} 
+              <Button className='login-button'
                 variant='contained' size='large'>
                 Login
               </Button>
               <div className='bottomText'>
-                <h5>New Here? <NavLink to='/register'> Create an Account  </NavLink></h5>
+                <h5>New Here? <NavLink className='link' to='/register'> Create an Account  </NavLink></h5>
               </div>
             </form>
           </div>

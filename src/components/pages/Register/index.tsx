@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import Container from '../../common/Container';
 import EmailIcon from '@mui/icons-material/Email';
 import PasswordIcon from '@mui/icons-material/Password';
+import BadgeIcon from '@mui/icons-material/Badge';
+import CallIcon from '@mui/icons-material/Call';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './Register.scss';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { registerUser } from '../../../loginApi';
 
 export default function Register() {
 
@@ -19,7 +23,18 @@ export default function Register() {
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
 
+  const [errorMsg, setErrorMsg] = useState('');
 
+  const handleRegister = async () => {
+    if (password === confirmPassword) {
+      
+
+
+    }else {
+      setErrorMsg('Password does not match')
+    }
+
+  }
 
   return (
     <Container >
@@ -40,15 +55,17 @@ export default function Register() {
               <div className='form-left'>
                 <div className='form-input'>
                   <TextField
+                    value={firstName}
                     id="filled-firstName-input"
                     label="First Name"
                     type="text"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <EmailIcon /> {/* Icon to be displayed at the start */}
+                          <BadgeIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
                     }}
@@ -56,15 +73,17 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={lastName}
                     id="filled-lastName-input"
                     label="Last Name"
                     type="text"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <EmailIcon /> {/* Icon to be displayed at the start */}
+                          <BadgeIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
                     }}
@@ -72,12 +91,14 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={email}
                     id="filled-email-input"
                     label="Email"
                     type="email"
                     autoComplete="current-email"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -89,12 +110,14 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={password}
                     id="filled-password-input"
                     label="Password"
                     type="password"
                     autoComplete="current-password"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -106,11 +129,13 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={confirmPassword}
                     id="filled-confirmPassword-input"
                     label="Confirm Password"
                     type="password"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -125,15 +150,17 @@ export default function Register() {
               <div className='form-right'>
                 <div className='form-input'>
                   <TextField
+                    value={contact}
                     id="filled-contact-input"
                     label="Contact Number"
                     type="phone"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <EmailIcon /> {/* Icon to be displayed at the start */}
+                          <CallIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
                     }}
@@ -141,16 +168,18 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={address1}
                     id="filled-address1-input"
                     label="Address Line 1"
                     type="address"
                     autoComplete="current-address"
                     variant="filled"
                     className='customTextField'
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <PasswordIcon /> {/* Icon to be displayed at the start */}
+                          <LocationOnIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
                     }}
@@ -158,6 +187,7 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={address2}
                     id="filled-address2-input"
                     label="Address Line 2"
                     type="address"
@@ -167,31 +197,25 @@ export default function Register() {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <PasswordIcon /> {/* Icon to be displayed at the start */}
+                          <LocationOnIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
                     }}
                   />
                 </div>
-                <Button sx={{
-                  width: '100%',
-                  bgcolor: 'white',
-                  color: '#E15C31',
-                  '&:hover': { bgcolor: 'lightgray' }
-                }}
-                  variant='contained' size='large'>
+                <Button className="login-button"
+                  variant='contained' size='large'
+                  onSubmit={handleRegister}>
                   Register
                 </Button>
                 <div className='bottomText'>
-                  <h5>Already Registered? <NavLink to='/login'> Login  </NavLink></h5>
+                  <h5>Already Registered? <NavLink className='link' to='/login'> Login  </NavLink></h5>
                 </div>
               </div>
 
 
             </form>
           </div>
-
-
 
         </div>
 
