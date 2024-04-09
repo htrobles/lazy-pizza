@@ -86,21 +86,22 @@
 
         }
 
-        .customTextField {
-            .MuiFilledInput-root {
-                background-color: white; // Change the background color as per your requirement
-            }
+        // .customTextField {
+        //     .MuiFilledInput-root {
+        //         background-color: white; // Change the background color as per your requirement
+        //         color: black;
+        //     }
 
-            // Change background color on hover and focus
-            .MuiFilledInput-root:hover,
-            .MuiFilledInput-root:focus {
-                background-color: rgb(241, 240, 240); // Change the background color on hover and focus
-                color: black;
-            }
+        //     // Change background color on hover and focus
+        //     .MuiFilledInput-root:hover,
+        //     .MuiFilledInput-root:focus {
+        //         background-color: rgb(241, 240, 240); // Change the background color on hover and focus
+        //         color: black;
+        //     }
 
-            width: 100%;
-            max-width: 450px;
-        }
+        //     width: 100%;
+        //     max-width: 450px;
+        // }
 
         .login-button {
             align-self: center;

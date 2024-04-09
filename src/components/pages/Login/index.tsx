@@ -5,14 +5,29 @@ import PasswordIcon from '@mui/icons-material/Password';
 import './Login.scss';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { loginUser, fetchUser } from '../../../loginApi';
 
 export default function Login() {
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLogin = async () => {
+    const input = { email, password };
 
+    try {
+      await loginUser(input);
+      await fetchUser(email);
+
+      setIsLoggedIn(true);
+
+    }
+    catch (error: any) {
+
+    }
+
+  }
 
 
   return (
@@ -33,6 +48,8 @@ export default function Login() {
             <form>
               <div className='form-input-email'>
                 <TextField
+                  value={email}
+                  required
                   id="filled-email-input"
                   label="Email"
                   type="email"
@@ -46,10 +63,15 @@ export default function Login() {
                       </InputAdornment>
                     ),
                   }}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setEmail(event.target.value);
+                  }}
                 />
               </div>
               <div className='form-input'>
                 <TextField
+                  value={password}
+                  required
                   id="filled-password-input"
                   label="Password"
                   type="password"
@@ -63,10 +85,16 @@ export default function Login() {
                       </InputAdornment>
                     ),
                   }}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setPassword(event.target.value);
+                  }}
                 />
               </div>
-              <Button className='login-button'
-                variant='contained' size='large'>
+              <Button
+                className='login-button'
+                variant='contained'
+                size='large'
+                onClick={handleLogin}>
                 Login
               </Button>
               <div className='bottomText'>

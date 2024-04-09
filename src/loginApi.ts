@@ -39,14 +39,13 @@ export const registerUser = async (input: {
   lastName: string,
   email: string,
   password: string,
-  confirmPassword: string,
   contact: string,
   address1: string,
   address2: string,
 }) => {
   try {
     const {
-      firstName, lastName, email, password, confirmPassword, contact, address1, address2,
+      firstName, lastName, email, password, contact, address1, address2,
     } = input;
 
     // Check for existing username and email

@@ -6,9 +6,11 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './Register.scss';
-import { Button, InputAdornment, TextField } from '@mui/material';
+import { Alert, Button, InputAdornment, TextField } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { registerUser } from '../../../loginApi';
+import { loginUser, registerUser } from '../../../loginApi';
+import Snackbar from '@mui/material/Snackbar';
+
 
 export default function Register() {
 
@@ -24,16 +26,59 @@ export default function Register() {
   const [address2, setAddress2] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('');
+  const [open, setOpen] = useState(false);
+  const [alertType, setAlertType] = useState();
+
+  const handleClearForm = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setContact('');
+    setAddress1('');
+    setAddress2('');
+  };
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handleRegister = async () => {
     if (password === confirmPassword) {
-      
 
+      try {
+        const input = {
+          firstName,
+          lastName,
+          email,
+          password,
+          contact,
+          address1,
+          address2,
+        };
+        await registerUser(input);
+        await loginUser(input);
 
-    }else {
-      setErrorMsg('Password does not match')
+        handleClearForm();
+        setIsLoggedIn(true);
+
+        setErrorMsg('Account successully registered!');
+        setOpen(true);
+      }
+      catch (error: any) {
+        console.log('reg err:', error.message);
+        setErrorMsg('Registration Failed!');
+        setOpen(true);
+      }
+    } else {
+      setErrorMsg('Password does not match');
+      setOpen(true);
     }
-
   }
 
   return (
@@ -52,6 +97,7 @@ export default function Register() {
 
           <div>
             <form className='form'>
+
               <div className='form-left'>
                 <div className='form-input'>
                   <TextField
@@ -68,6 +114,9 @@ export default function Register() {
                           <BadgeIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
+                    }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setFirstName(event.target.value);
                     }}
                   />
                 </div>
@@ -86,6 +135,9 @@ export default function Register() {
                           <BadgeIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
+                    }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setLastName(event.target.value);
                     }}
                   />
                 </div>
@@ -106,6 +158,9 @@ export default function Register() {
                         </InputAdornment>
                       ),
                     }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setEmail(event.target.value);
+                    }}
                   />
                 </div>
                 <div className='form-input'>
@@ -125,6 +180,9 @@ export default function Register() {
                         </InputAdornment>
                       ),
                     }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setPassword(event.target.value);
+                    }}
                   />
                 </div>
                 <div className='form-input'>
@@ -142,6 +200,9 @@ export default function Register() {
                           <PasswordIcon /> {/* Icon to be displayed at the start */}
                         </InputAdornment>
                       ),
+                    }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setConfirmPassword(event.target.value);
                     }}
                   />
                 </div>
@@ -164,6 +225,9 @@ export default function Register() {
                         </InputAdornment>
                       ),
                     }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setContact(event.target.value);
+                    }}
                   />
                 </div>
                 <div className='form-input'>
@@ -183,6 +247,9 @@ export default function Register() {
                         </InputAdornment>
                       ),
                     }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setAddress1(event.target.value);
+                    }}
                   />
                 </div>
                 <div className='form-input'>
@@ -201,11 +268,14 @@ export default function Register() {
                         </InputAdornment>
                       ),
                     }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setAddress2(event.target.value);
+                    }}
                   />
                 </div>
                 <Button className="login-button"
                   variant='contained' size='large'
-                  onSubmit={handleRegister}>
+                  onClick={handleRegister}>
                   Register
                 </Button>
                 <div className='bottomText'>
@@ -218,7 +288,16 @@ export default function Register() {
           </div>
 
         </div>
-
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity='info'
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            {errorMsg}
+          </Alert>
+        </Snackbar>
         <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
       </div>
     </Container>
