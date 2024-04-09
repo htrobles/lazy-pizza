@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  Auth, UserCredential, signOut,
 } from 'firebase/auth';
 import {
   collection,
@@ -12,6 +13,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { auth, db } from './firebase';
+import { User } from './types';
 
 const usersCollection = collection(db, 'users');
 
@@ -87,10 +89,52 @@ export const registerUser = async (input: {
   }
 };
 
-export const fetchUser = async (email: string) => {
+export const fetchUser = async (email: string): Promise<User | null> => {
   const userRef = doc(db, 'users', email);
+  const userDoc = await getDoc(userRef);
 
-  const user = await getDoc(userRef);
+  if (!userDoc.exists()) {
+    return null; // Return null if the document does not exist
+  }
+  
+  const userData = userDoc.data(); 
 
-  return { ...user.data(), id: email };
+  const user: User = {
+    email,
+    firstName: userData.firstName || '', 
+    lastName: userData.lastName || '', 
+    contact: userData.contact || '', 
+    address1: userData.address1 || '', 
+    address2: userData.address2 || '', 
+  };
+
+  return user;
+};
+
+export const logoutUser = async (): Promise<void> => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error('Logout error:', error);
+    throw new Error('Failed to logout');
+  }
+};
+
+export const updateUser = async (input: {
+  email: string,
+  password: string,
+  contact: string,
+  address1: string,
+  address2: string,
+}): Promise<void> => {
+  try {
+    const {
+      email, password, contact, address1, address2,
+    } = input;
+    const userRef = doc(db, 'users', email);
+    await setDoc(userRef, input, { merge: true });
+  } catch (error) {
+    console.error('Update user error:', error);
+    throw new Error('Failed to update user');
+  }
 };

@@ -21,7 +21,7 @@ export default function Login() {
       await fetchUser(email);
 
       setIsLoggedIn(true);
-
+      console.log("login successful");
     }
     catch (error: any) {
 
@@ -102,9 +102,6 @@ export default function Login() {
               </div>
             </form>
           </div>
-
-
-
         </div>
 
         <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />

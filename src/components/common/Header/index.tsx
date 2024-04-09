@@ -19,6 +19,10 @@ const navLinks = [
   {
     href: '/login',
     label: 'Login',
+  }, 
+  {
+    href: '/user',
+    label: 'User',
   },
 ];
 
