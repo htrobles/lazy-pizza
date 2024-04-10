@@ -21,3 +21,9 @@ export interface Pizza {
   meats?: EMeat[];
   veggies?: EVeggie[];
 }
+
+export interface MyAlertProps {
+  open: boolean;
+  alertType: 'success' | 'error' | 'warning' | 'info';
+  message: string;
+}

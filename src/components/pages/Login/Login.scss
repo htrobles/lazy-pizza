@@ -1,7 +1,7 @@
 .login {
     height: calc(100vh - 160px);
     overflow-y: hidden;
-    overflow-x: auto;
+    overflow-x: hidden;
     position: relative;
 
     .orangeBox {
@@ -12,11 +12,14 @@
         border-radius: 16px;
         position: relative;
         padding: 20px;
-        margin-left: 650px;
+        margin-left: 45%;
+       
+
     }
 
     .header {
         margin-top: 10px;
+        position: relative;
 
         h1 {
             margin: 0;
@@ -27,9 +30,23 @@
 
     .subHeader {
         margin-top: 0px;
+        position: relative;
 
         h4 {
             margin: 0;
+        }
+    }
+
+    .pizzaIcon {
+        width: 400px;
+        z-index: +1;
+        position: absolute;
+        top: +30px;
+        right: -160px;
+        @media (max-width: 1080px) {
+            width: 300px;
+            top: +50px;
+            right: -100px;
         }
     }
 
@@ -101,20 +118,8 @@
                 letter-spacing: 2px;
             }
         }
-
-
     }
 
-    .pizzaIcon {
-        width: 400px;
-        z-index: +1;
-        position: absolute;
-        top: +30px;
-        right: -150px;
-    }
-
-   
-    
     .pizza-bg {
         z-index: -1;
         height: 140vh;
@@ -124,32 +129,68 @@
         transform: translateX(-50%);
     }
 
-    @media (max-width: 768px) {
-
+    @media (max-width: 1080px) {
         .orangeBox {
             margin: 0 auto;
         }
     }
 
+    // tablet view
+    @media (max-width: 768px) {
+        .login{
+            overflow-y:visible;
+        }
+        .orangeBox {
+            margin: 0 auto;
+        }
+
+        .pizzaIcon {
+            width: 0px;
+
+        }
+    }
+
+    // phone view
+    @media (max-width: 480px) {
+        .login{
+            overflow-y:visible;
+        }
+        .orangeBox {
+            margin: 0 auto;
+        }
+
+        .pizzaIcon {
+            width: 0px;
+        }
+    }
+
 }
+
 .profile {
+    height: calc(100vh - 160px);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: 0px;
+    margin-left: 100px;
 
-    .profile-box{
+    .profile-box {
         flex: 1;
         margin-left: 0px;
+        width: 100%;
     }
 
     .profile-buttons {
         flex: 1;
-        margin-top: 30px;
+        margin-top: 200px;
+        margin-left: 30px;
+
         .edit-button {
             align-self: center;
-            margin-top: 20px;
-            width: 60%;
+            margin: 10px;
+            width: 50%;
             background-color: white;
             border-bottom: 2px solid black;
             color: #E15C31;
@@ -166,8 +207,8 @@
 
         .logout-button {
             align-self: center;
-            margin-top: 20px;
-            width: 60%;
+            margin: 10px;
+            width: 50%;
             background-color: white;
             border-bottom: 2px solid black;
             color: black;

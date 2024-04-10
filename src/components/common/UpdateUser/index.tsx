@@ -5,10 +5,11 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './UpdateUser.scss';
-import { Alert, Button, InputAdornment, TextField } from '@mui/material';
-import Snackbar from '@mui/material/Snackbar';
+import { Button, InputAdornment, TextField } from '@mui/material';
 import { updateUser } from '../../../loginApi';
 import { Navigate } from 'react-router-dom';
+import MyAlert from '../MyAlert';
+import { MyAlertProps } from '../../../types';
 
 interface UpdateUserProps {
   userData: any;
@@ -22,10 +23,10 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
   const [contact, setContact] = useState(userData.contact);
   const [address1, setAddress1] = useState(userData.address1);
   const [address2, setAddress2] = useState(userData.address2);
-  const [errorMsg, setErrorMsg] = useState('');
-  const [open, setOpen] = useState(false);
 
-  const handleClose = () => setOpen(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(null);
+  const [open, setOpen] = useState(false);
 
   const handleUpdate = async () => {
     try {
@@ -42,27 +43,45 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
       setErrorMsg('User information updated successfully!');
       setOpen(true);
 
-      // Call the callback function to update user data in the parent component
-      //onUpdate(updatedUserData);
+      localStorage.setItem('myUser', JSON.stringify([updatedUser]));
+
+      const myUser = JSON.parse(localStorage.getItem('myUser') as string);
+
+      console.log('updated:', myUser[0]);
+
+      setOpen(true);
+      setAlertType('success');
+      setErrorMsg('User Update Successful!');
 
       // Call onEditToggle to close the edit mode
       onEditToggle();
+
       // Navigate back to login page with isLoggedIn=true
-      return <Navigate to="/login" state={{ isLoggedIn: true }} />;
+      return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
 
     } catch (error: any) {
-      setErrorMsg('Failed to update user information');
       setOpen(true);
+      setAlertType('error');
+      setErrorMsg('Failed to update user information');
+      console.log("error: ", error);
     }
   };
 
 
   return (
     <Container>
-      <div className='register'>
+      <MyAlert
+        open={open ?? true}
+        alertType={alertType ?? 'info'}
+        message={errorMsg ?? 'Please Login to continue your order.'}
+      />
+      <div className='update-user'>
         <div className='orangeBox'>
           <div className='header'>
             <h1>Update Your Information</h1>
+          </div>
+          <div className='subHeader'>
+            <h4>Edit your details below:</h4>
           </div>
           <div>
             <form className='form'>
@@ -213,17 +232,8 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
             </form>
           </div>
         </div>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity='info'
-            variant="filled"
-            sx={{ width: '100%' }}
-          >
-            {errorMsg}
-          </Alert>
-        </Snackbar>
-        <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
+
+        <img className="update-pizza-bg" src='/pizza-4.png' alt="pizza-bg2" />
       </div>
     </Container>
   );

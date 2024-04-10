@@ -1,16 +1,16 @@
-.profile {
-    .orangeBox {
+.my-profile {
+    .profile-orangeBox {
         background-color: rgba(225, 92, 49, 0.9);
-        width: 400px;
-        max-height: 350px;
-        max-width: 400px;
+        width: 550px;
+        height: 350px;
+        max-height: 550px;
+        max-width: 550px;
         border-radius: 16px;
         padding: 20px;
     }
 
     .header {
         margin-top: 10px;
-
         h1 {
             margin: 0;
             font-family: 'Bebas Neue';
@@ -20,7 +20,6 @@
 
     .subHeader {
         margin-top: 0px;
-
         h4 {
             margin: 0;
         }
@@ -30,14 +29,32 @@
         justify-content: flex-start;
         align-items: flex-start;
         text-align: left;
-        margin-top: 20px;
+        margin-top: 30px;
 
         h5 {
-            margin: 0;
+            margin-top: 10px; /* Increased margin for better separation */
             font-weight: 400;
             text-align: left;
+            font-size: 18px; /* Increased font size for better readability */
+            color: white; /* Set text color to white */
+        }
+        .detail-label {
+            font-weight: 600; 
+            color: #f8d7cc; 
         }
 
+        .detail-value {
+            margin-left: 25px; 
+            font-weight: 400;
+        }
+    }
+    .pizza-bg {
+        z-index: -1;
+        height: 200vh;
+        position: absolute;
+        top: 0%;
+        left: 45%;
+        transform: translateX(-50%);
     }
 
     @media (max-width: 768px) {
@@ -45,5 +62,4 @@
             margin: 0 auto;
         }
     }
-
 }

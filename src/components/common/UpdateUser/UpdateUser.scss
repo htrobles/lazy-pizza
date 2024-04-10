@@ -1,10 +1,11 @@
-.register {
+.update-user {
     height: calc(100vh - 160px);
     overflow-y: hidden;
     overflow-x: auto;
     position: relative;
 
     .orangeBox {
+        z-index: +1;
         background-color: rgba(225, 92, 49, 0.9);
         height: 500px;
         max-height: 500px;
@@ -12,7 +13,7 @@
         border-radius: 16px;
         position: relative;
         padding: 20px;
-        margin-left: 120px;
+        margin-left: 100px;
 
         .header {
             margin-top: 10px;
@@ -84,7 +85,8 @@
 
             }
 
-            .update-button {
+            .update-button,
+            .cancel-button {
                 align-self: center;
                 margin-top: 20px;
                 width: 80%;
@@ -102,26 +104,6 @@
                 }
             }
 
-            .cancel-button {
-                align-self: center;
-                margin-top: 20px;
-                width: 80%;
-                background-color: white;
-                border-bottom: 2px solid black;
-                color: black;
-                font-family: 'Montserrat';
-                font-weight: 800;
-                font-size: 16px;
-
-                &:hover {
-                    background-color: black;
-                    color: #E15C31;
-                    border-bottom: 2px solid white;
-                    letter-spacing: 4px;
-                }
-            }
-
-
             .link {
                 color: white;
                 font-weight: 400;
@@ -133,21 +115,20 @@
                 }
             }
         }
+    }
 
-        .pizza-bg {
-            z-index: -1;
-            height: 140vh;
-            position: absolute;
-            top: 0%;
-            left: 45%;
-            transform: translateX(-50%);
+    .update-pizza-bg {
+        z-index: -1;
+        height: 150vh;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+        .orangeBox {
+            margin: 0 auto;
         }
-
-        @media (max-width: 768px) {
-            .orangeBox {
-                margin: 0 auto;
-            }
-        }
-
     }
 }

@@ -6,15 +6,15 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './Register.scss';
-import { Alert, Button, InputAdornment, TextField } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-import { loginUser, registerUser } from '../../../loginApi';
-import Snackbar from '@mui/material/Snackbar';
+import { Button, InputAdornment, TextField } from '@mui/material';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { registerUser } from '../../../loginApi';
+import { MyAlertProps } from '../../../types';
+import MyAlert from '../../common/MyAlert';
 
 
 export default function Register() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -26,8 +26,8 @@ export default function Register() {
   const [address2, setAddress2] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('');
+  const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(null);
   const [open, setOpen] = useState(false);
-  const [alertType, setAlertType] = useState();
 
   const handleClearForm = () => {
     setFirstName('');
@@ -38,14 +38,6 @@ export default function Register() {
     setContact('');
     setAddress1('');
     setAddress2('');
-  };
-
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
   };
 
   const handleRegister = async () => {
@@ -62,27 +54,36 @@ export default function Register() {
           address2,
         };
         await registerUser(input);
-        await loginUser(input);
 
         handleClearForm();
-        setIsLoggedIn(true);
-
-        setErrorMsg('Account successully registered!');
+       
         setOpen(true);
+        setAlertType('success');
+        setErrorMsg('Account successully registered! Login to continue');
+
+        // Navigate back to login page 
+        navigate('/login');
       }
       catch (error: any) {
         console.log('reg err:', error.message);
-        setErrorMsg('Registration Failed!');
         setOpen(true);
+        setAlertType('error');
+        setErrorMsg('Registration Failed! Enter details correctly.');
       }
     } else {
-      setErrorMsg('Password does not match');
       setOpen(true);
+      setAlertType('error');
+      setErrorMsg('Password does not match! Try again.');
     }
   }
 
   return (
     <Container >
+      <MyAlert
+        open={open ?? true}
+        alertType={alertType ?? 'info'}
+        message={errorMsg ?? 'Please Register to continue your order.'}
+      />
       <div className='register'>
         <div className='orangeBox'>
           <div className='header'>
@@ -288,16 +289,7 @@ export default function Register() {
           </div>
 
         </div>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity='info'
-            variant="filled"
-            sx={{ width: '100%' }}
-          >
-            {errorMsg}
-          </Alert>
-        </Snackbar>
+
         <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
       </div>
     </Container>
