@@ -16,87 +16,13 @@ import PizzaPreview from '../../common/PizzaPreview';
 import { ECheese, EMeat, ESauce, EVeggie } from '../../../enums';
 import { useNavigate } from 'react-router-dom';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-
-const sauceChoices = [
-  {
-    key: ESauce.tomato,
-    label: 'Tomato',
-  },
-  {
-    key: ESauce.alfredo,
-    label: 'Alfredo',
-  },
-];
-
-const cheeseChoices = [
-  {
-    key: ECheese.mozzarella,
-    label: 'Mozzarella',
-  },
-  {
-    key: ECheese.cheddar,
-    label: 'Cheddar',
-  },
-  {
-    key: ECheese.parmesan,
-    label: 'Parmesan',
-  },
-];
-
-const meatChoices = [
-  {
-    key: EMeat.pepperoni,
-    label: 'Pepperoni',
-  },
-  {
-    key: EMeat.ham,
-    label: 'Ham',
-  },
-  {
-    key: EMeat.bacon,
-    label: 'Bacon',
-  },
-  {
-    key: EMeat.chicken,
-    label: 'Chicken',
-  },
-  {
-    key: EMeat.shrimp,
-    label: 'Shrimp',
-  },
-];
-
-const veggieChoices = [
-  {
-    key: EVeggie.tomatoes,
-    label: 'Tomatoes',
-  },
-  {
-    key: EVeggie.onions,
-    label: 'Onions',
-  },
-  {
-    key: EVeggie.bell_peppers,
-    label: 'Bell Peppers',
-  },
-  {
-    key: EVeggie.mushrooms,
-    label: 'Mushrooms',
-  },
-  {
-    key: EVeggie.black_olives,
-    label: 'Black Olives',
-  },
-  {
-    key: EVeggie.pineapples,
-    label: 'Pineapples',
-  },
-];
-
-interface AlertType {
-  type: 'error' | 'success';
-  message: string;
-}
+import {
+  AlertType,
+  cheeseChoices,
+  meatChoices,
+  sauceChoices,
+  veggieChoices,
+} from '../../../ingredients';
 
 export default function Build() {
   const [sauce, setSauce] = useState<ESauce>(ESauce.tomato);

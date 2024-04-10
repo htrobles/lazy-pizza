@@ -1,3 +1,5 @@
+  
+import { ECheese, EMeat, ESauce, EVeggie } from './enums';
 
 export interface User {
     email:string;
@@ -7,4 +9,15 @@ export interface User {
     address2?: string;
     contact?: string;
   }
-  
+
+export interface Ingredient<IngredientEnum> {
+  key: IngredientEnum;
+  label: string;
+}
+
+export interface Pizza {
+  sauce: ESauce;
+  cheese: ECheese;
+  meats?: EMeat[];
+  veggies?: EVeggie[];
+}
