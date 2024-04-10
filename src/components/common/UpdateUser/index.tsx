@@ -25,7 +25,9 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
   const [address2, setAddress2] = useState(userData.address2);
 
   const [errorMsg, setErrorMsg] = useState('');
-  const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(null);
+  const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(
+    null
+  );
   const [open, setOpen] = useState(false);
 
   const handleUpdate = async () => {
@@ -45,28 +47,31 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
       setAlertType('success');
       setErrorMsg('User information updated successfully! Loading update...');
 
-      localStorage.setItem('myUser', JSON.stringify([updatedUser]));
+      localStorage.setItem('myProfile', JSON.stringify([updatedUser]));
 
-      const myUser = JSON.parse(localStorage.getItem('myUser') as string);
+      const myProfile = JSON.parse(localStorage.getItem('myProfile') as string);
 
-      console.log('updated:', myUser[0]);
+      console.log('updated:', myProfile);
 
-    //  onEditToggle();
-     // return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
+      //  onEditToggle();
+      // return <Navigate to="/login" state={{ isLoggedIn: true, userData: myProfile }} />;
 
       setTimeout(() => {
         onEditToggle();
-        return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
+        return (
+          <Navigate
+            to='/login'
+            state={{ isLoggedIn: true, userData: myProfile }}
+          />
+        );
       }, 6000);
-
     } catch (error: any) {
       setOpen(true);
       setAlertType('error');
       setErrorMsg('Failed to update user information');
-      console.log("error: ", error);
+      console.log('error: ', error);
     }
   };
-
 
   return (
     <Container>
@@ -85,20 +90,19 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
           </div>
           <div>
             <form className='form'>
-
               <div className='form-left'>
                 <div className='form-input'>
                   <TextField
                     value={firstName}
-                    id="filled-firstName-input"
-                    label="First Name"
-                    type="text"
-                    variant="filled"
+                    id='filled-firstName-input'
+                    label='First Name'
+                    type='text'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <BadgeIcon />
                         </InputAdornment>
                       ),
@@ -111,15 +115,15 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
                 <div className='form-input'>
                   <TextField
                     value={lastName}
-                    id="filled-lastName-input"
-                    label="Last Name"
-                    type="text"
-                    variant="filled"
+                    id='filled-lastName-input'
+                    label='Last Name'
+                    type='text'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <BadgeIcon />
                         </InputAdornment>
                       ),
@@ -132,16 +136,16 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
                 <div className='form-input'>
                   <TextField
                     value={email}
-                    id="filled-email-input"
-                    label="Email"
-                    type="email"
-                    autoComplete="current-email"
-                    variant="filled"
+                    id='filled-email-input'
+                    label='Email'
+                    type='email'
+                    autoComplete='current-email'
+                    variant='filled'
                     className='customTextField'
                     disabled
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <EmailIcon />
                         </InputAdornment>
                       ),
@@ -154,15 +158,15 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
                 <div className='form-input'>
                   <TextField
                     value={contact}
-                    id="filled-contact-input"
-                    label="Contact Number"
-                    type="phone"
-                    variant="filled"
+                    id='filled-contact-input'
+                    label='Contact Number'
+                    type='phone'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <CallIcon />
                         </InputAdornment>
                       ),
@@ -178,16 +182,16 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
                 <div className='form-input'>
                   <TextField
                     value={address1}
-                    id="filled-address1-input"
-                    label="Address Line 1"
-                    type="address"
-                    autoComplete="current-address"
-                    variant="filled"
+                    id='filled-address1-input'
+                    label='Address Line 1'
+                    type='address'
+                    autoComplete='current-address'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <LocationOnIcon />
                         </InputAdornment>
                       ),
@@ -200,15 +204,15 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
                 <div className='form-input'>
                   <TextField
                     value={address2}
-                    id="filled-address2-input"
-                    label="Address Line 2"
-                    type="address"
-                    autoComplete="current-address"
-                    variant="filled"
+                    id='filled-address2-input'
+                    label='Address Line 2'
+                    type='address'
+                    autoComplete='current-address'
+                    variant='filled'
                     className='customTextField'
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <LocationOnIcon />
                         </InputAdornment>
                       ),
@@ -218,14 +222,20 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
                     }}
                   />
                 </div>
-                <Button className="update-button"
-                  variant='contained' size='large'
-                  onClick={handleUpdate}>
+                <Button
+                  className='update-button'
+                  variant='contained'
+                  size='large'
+                  onClick={handleUpdate}
+                >
                   Update
                 </Button>
-                <Button className="cancel-button"
-                  variant='contained' size='large'
-                  onClick={onEditToggle}>
+                <Button
+                  className='cancel-button'
+                  variant='contained'
+                  size='large'
+                  onClick={onEditToggle}
+                >
                   Cancel
                 </Button>
               </div>
@@ -233,7 +243,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
           </div>
         </div>
 
-        <img className="update-pizza-bg" src='/pizza-4.png' alt="pizza-bg2" />
+        <img className='update-pizza-bg' src='/pizza-4.png' alt='pizza-bg2' />
       </div>
     </Container>
   );
