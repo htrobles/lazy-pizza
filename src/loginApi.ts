@@ -30,7 +30,7 @@ export const loginUser = async (input: { email: string, password: string }) => {
     const userData = querySnapshot.docs[0].data();
 
     return userData;
-  } catch (error: any) { // explicitly type the error parameter
+  } catch (error: any) {
     console.log({ code: error.code, message: error.message });
     throw new Error('You have entered invalid credentials.');
   }
@@ -50,7 +50,6 @@ export const registerUser = async (input: {
       firstName, lastName, email, password, contact, address1, address2,
     } = input;
 
-    // Check for existing username and email
     const userRef = doc(db, 'users', email);
     const docSnap = await getDoc(userRef);
 
@@ -58,7 +57,6 @@ export const registerUser = async (input: {
       throw new Error('Email already taken');
     }
 
-    // Create User
     const { user: newUser } = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -122,14 +120,15 @@ export const logoutUser = async (): Promise<void> => {
 
 export const updateUser = async (input: {
   email: string,
-  password: string,
+  firstName: string,
+  lastName:string,
   contact: string,
   address1: string,
   address2: string,
 }): Promise<void> => {
   try {
     const {
-      email, password, contact, address1, address2,
+      email, firstName, lastName, contact, address1, address2,
     } = input;
     const userRef = doc(db, 'users', email);
     await setDoc(userRef, input, { merge: true });

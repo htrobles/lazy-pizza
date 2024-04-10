@@ -1,100 +1,69 @@
 import React, { useState } from 'react';
-import Container from '../../common/Container';
+import Container from '../Container';
 import EmailIcon from '@mui/icons-material/Email';
-import PasswordIcon from '@mui/icons-material/Password';
 import BadgeIcon from '@mui/icons-material/Badge';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import './Register.scss';
+import './UpdateUser.scss';
 import { Alert, Button, InputAdornment, TextField } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-import { loginUser, registerUser } from '../../../loginApi';
 import Snackbar from '@mui/material/Snackbar';
+import { updateUser } from '../../../loginApi';
+import { Navigate } from 'react-router-dom';
 
+interface UpdateUserProps {
+  userData: any;
+  onEditToggle: () => void;
+}
 
-export default function Register() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [contact, setContact] = useState('');
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-
+const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
+  const [firstName, setFirstName] = useState(userData.firstName);
+  const [lastName, setLastName] = useState(userData.lastName);
+  const [email, setEmail] = useState(userData.email);
+  const [contact, setContact] = useState(userData.contact);
+  const [address1, setAddress1] = useState(userData.address1);
+  const [address2, setAddress2] = useState(userData.address2);
   const [errorMsg, setErrorMsg] = useState('');
   const [open, setOpen] = useState(false);
-  const [alertType, setAlertType] = useState();
 
-  const handleClearForm = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setContact('');
-    setAddress1('');
-    setAddress2('');
-  };
+  const handleClose = () => setOpen(false);
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  const handleUpdate = async () => {
+    try {
+      const updatedUser = {
+        ...userData,
+        firstName,
+        lastName,
+        email,
+        contact,
+        address1,
+        address2,
+      };
+      await updateUser(updatedUser);
+      setErrorMsg('User information updated successfully!');
+      setOpen(true);
 
-    setOpen(false);
-  };
+      // Call the callback function to update user data in the parent component
+      //onUpdate(updatedUserData);
 
-  const handleRegister = async () => {
-    if (password === confirmPassword) {
+      // Call onEditToggle to close the edit mode
+      onEditToggle();
+      // Navigate back to login page with isLoggedIn=true
+      return <Navigate to="/login" state={{ isLoggedIn: true }} />;
 
-      try {
-        const input = {
-          firstName,
-          lastName,
-          email,
-          password,
-          contact,
-          address1,
-          address2,
-        };
-        await registerUser(input);
-        await loginUser(input);
-
-        handleClearForm();
-        setIsLoggedIn(true);
-
-        setErrorMsg('Account successully registered!');
-        setOpen(true);
-      }
-      catch (error: any) {
-        console.log('reg err:', error.message);
-        setErrorMsg('Registration Failed!');
-        setOpen(true);
-      }
-    } else {
-      setErrorMsg('Password does not match');
+    } catch (error: any) {
+      setErrorMsg('Failed to update user information');
       setOpen(true);
     }
-  }
+  };
+
 
   return (
-    <Container >
+    <Container>
       <div className='register'>
         <div className='orangeBox'>
           <div className='header'>
-            <h1>HEY THERE!</h1>
+            <h1>Update Your Information</h1>
           </div>
-          <div className='subHeader'>
-            <h4>Enter your details to register.</h4>
-          </div>
-          <div >
-            <img className='pizzaIcon' src='/pizza-icon.png' alt='pizza icon' />
-          </div>
-
           <div>
             <form className='form'>
 
@@ -150,7 +119,7 @@ export default function Register() {
                     autoComplete="current-email"
                     variant="filled"
                     className='customTextField'
-                    required
+                    disabled
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -163,52 +132,6 @@ export default function Register() {
                     }}
                   />
                 </div>
-                <div className='form-input'>
-                  <TextField
-                    value={password}
-                    id="filled-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setPassword(event.target.value);
-                    }}
-                  />
-                </div>
-                <div className='form-input'>
-                  <TextField
-                    value={confirmPassword}
-                    id="filled-confirmPassword-input"
-                    label="Confirm Password"
-                    type="password"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setConfirmPassword(event.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className='form-right'>
                 <div className='form-input'>
                   <TextField
                     value={contact}
@@ -230,6 +153,9 @@ export default function Register() {
                     }}
                   />
                 </div>
+              </div>
+
+              <div className='form-right'>
                 <div className='form-input'>
                   <TextField
                     value={address1}
@@ -273,20 +199,19 @@ export default function Register() {
                     }}
                   />
                 </div>
-                <Button className="login-button"
+                <Button className="update-button"
                   variant='contained' size='large'
-                  onClick={handleRegister}>
-                  Register
+                  onClick={handleUpdate}>
+                  Update
                 </Button>
-                <div className='bottomText'>
-                  <h5>Already Registered? <NavLink className='link' to='/login'> Login  </NavLink></h5>
-                </div>
+                <Button className="cancel-button"
+                  variant='contained' size='large'
+                  onClick={onEditToggle}>
+                  Cancel
+                </Button>
               </div>
-
-
             </form>
           </div>
-
         </div>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert
@@ -302,4 +227,6 @@ export default function Register() {
       </div>
     </Container>
   );
-}
+};
+
+export default UpdateUser;

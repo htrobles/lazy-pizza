@@ -5,7 +5,6 @@
     position: relative;
 
     .orangeBox {
-        //background-color: #E15C31;
         background-color: rgba(225, 92, 49, 0.9);
         height: 500px;
         max-height: 500px;
@@ -13,7 +12,7 @@
         border-radius: 16px;
         position: relative;
         padding: 20px;
-        margin-left: 120px; // Move the box to the right initially
+        margin-left: 120px;
     }
 
     .header {
@@ -86,23 +85,6 @@
 
         }
 
-        // .customTextField {
-        //     .MuiFilledInput-root {
-        //         background-color: white; // Change the background color as per your requirement
-        //         color: black;
-        //     }
-
-        //     // Change background color on hover and focus
-        //     .MuiFilledInput-root:hover,
-        //     .MuiFilledInput-root:focus {
-        //         background-color: rgb(241, 240, 240); // Change the background color on hover and focus
-        //         color: black;
-        //     }
-
-        //     width: 100%;
-        //     max-width: 450px;
-        // }
-
         .login-button {
             align-self: center;
             margin-top: 20px;
@@ -113,10 +95,11 @@
             font-family: 'Montserrat';
             font-weight: 800;
             font-size: 16px;
+
             &:hover {
-              background-color:black;
-              border-bottom: 2px solid  white;
-              letter-spacing: 4px;
+                background-color: black;
+                border-bottom: 2px solid white;
+                letter-spacing: 4px;
             }
         }
 
@@ -124,10 +107,11 @@
             color: white;
             font-weight: 400;
             text-decoration: underline;
+
             &:hover {
                 color: black;
                 letter-spacing: 4px;
-              }
+            }
         }
     }
 
@@ -142,9 +126,8 @@
 
     @media (max-width: 768px) {
 
-        // Adjust breakpoint as needed for tablet size
         .orangeBox {
-            margin: 0 auto; // Center the box horizontally for smaller screens
+            margin: 0 auto;
         }
     }
 
