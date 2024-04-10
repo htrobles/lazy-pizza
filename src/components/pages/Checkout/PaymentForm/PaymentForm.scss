@@ -1,0 +1,31 @@
+.payment-form {
+  border: 1px solid #fff;
+  padding: 32px;
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .form-group-input {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+  }
+
+  .submit {
+    display: block;
+    width: 100%;
+  }
+
+  .ingredient-radio {
+    color: #fff;
+  }
+}
