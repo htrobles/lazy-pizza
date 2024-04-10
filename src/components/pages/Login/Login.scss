@@ -1,0 +1,228 @@
+.login {
+    height: calc(100vh - 160px);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+
+    .orangeBox {
+        background-color: rgba(225, 92, 49, 0.9);
+        height: 500px;
+        max-height: 500px;
+        max-width: 400px;
+        border-radius: 16px;
+        position: relative;
+        padding: 20px;
+        margin-left: 45%;
+       
+
+    }
+
+    .header {
+        margin-top: 10px;
+        position: relative;
+
+        h1 {
+            margin: 0;
+            font-family: 'Bebas Neue';
+            font-size: 50px;
+        }
+    }
+
+    .subHeader {
+        margin-top: 0px;
+        position: relative;
+
+        h4 {
+            margin: 0;
+        }
+    }
+
+    .pizzaIcon {
+        width: 400px;
+        z-index: +1;
+        position: absolute;
+        top: +30px;
+        right: -160px;
+        @media (max-width: 1080px) {
+            width: 300px;
+            top: +50px;
+            right: -100px;
+        }
+    }
+
+    .form {
+        text-align: center;
+
+        .bottomText {
+            margin-top: 16px;
+            align-content: center;
+            justify-content: center;
+
+            h5 {
+                margin: 0;
+                align-items: center;
+                text-align: center;
+                font-weight: 600;
+            }
+        }
+
+        .form-input-email {
+            margin-top: 130px;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            margin-bottom: 20px;
+        }
+
+        .customTextField {
+            .MuiFilledInput-root {
+                background-color: white;
+            }
+
+            .MuiFilledInput-root:hover,
+            .MuiFilledInput-root:focus {
+                background-color: rgb(241, 240, 240);
+                color: black;
+            }
+
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-button {
+            align-self: center;
+            margin-top: 20px;
+            width: 80%;
+            background-color: white;
+            border-bottom: 2px solid black;
+            color: #E15C31;
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-size: 16px;
+
+            &:hover {
+                background-color: black;
+                border-bottom: 2px solid white;
+                letter-spacing: 4px;
+            }
+        }
+
+        .link {
+            color: white;
+            font-weight: 400;
+            text-decoration: underline;
+
+            &:hover {
+                color: black;
+                letter-spacing: 2px;
+            }
+        }
+    }
+
+    .pizza-bg {
+        z-index: -1;
+        height: 140vh;
+        position: absolute;
+        top: 0%;
+        left: 45%;
+        transform: translateX(-50%);
+    }
+
+    @media (max-width: 1080px) {
+        .orangeBox {
+            margin: 0 auto;
+        }
+    }
+
+    // tablet view
+    @media (max-width: 768px) {
+        .login{
+            overflow-y:visible;
+        }
+        .orangeBox {
+            margin: 0 auto;
+        }
+
+        .pizzaIcon {
+            width: 0px;
+
+        }
+    }
+
+    // phone view
+    @media (max-width: 480px) {
+        .login{
+            overflow-y:visible;
+        }
+        .orangeBox {
+            margin: 0 auto;
+        }
+
+        .pizzaIcon {
+            width: 0px;
+        }
+    }
+
+}
+
+.profile {
+    height: calc(100vh - 160px);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 100px;
+
+    .profile-box {
+        flex: 1;
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .profile-buttons {
+        flex: 1;
+        margin-top: 200px;
+        margin-left: 30px;
+
+        .edit-button {
+            align-self: center;
+            margin: 10px;
+            width: 50%;
+            background-color: white;
+            border-bottom: 2px solid black;
+            color: #E15C31;
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-size: 16px;
+
+            &:hover {
+                background-color: black;
+                border-bottom: 2px solid white;
+                letter-spacing: 4px;
+            }
+        }
+
+        .logout-button {
+            align-self: center;
+            margin: 10px;
+            width: 50%;
+            background-color: white;
+            border-bottom: 2px solid black;
+            color: black;
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-size: 16px;
+
+            &:hover {
+                background-color: black;
+                color: #E15C31;
+                border-bottom: 2px solid white;
+                letter-spacing: 4px;
+            }
+        }
+    }
+
+}

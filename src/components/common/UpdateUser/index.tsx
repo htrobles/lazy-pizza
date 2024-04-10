@@ -1,101 +1,88 @@
 import React, { useState } from 'react';
-import Container from '../../common/Container';
+import Container from '../Container';
 import EmailIcon from '@mui/icons-material/Email';
-import PasswordIcon from '@mui/icons-material/Password';
 import BadgeIcon from '@mui/icons-material/Badge';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import './Register.scss';
+import './UpdateUser.scss';
 import { Button, InputAdornment, TextField } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../loginApi';
+import { updateUser } from '../../../loginApi';
+import { Navigate } from 'react-router-dom';
+import MyAlert from '../MyAlert';
 import { MyAlertProps } from '../../../types';
-import MyAlert from '../../common/MyAlert';
 
+interface UpdateUserProps {
+  userData: any;
+  onEditToggle: () => void;
+}
 
-export default function Register() {
-  const navigate = useNavigate();
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [contact, setContact] = useState('');
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
+const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
+  const [firstName, setFirstName] = useState(userData.firstName);
+  const [lastName, setLastName] = useState(userData.lastName);
+  const [email, setEmail] = useState(userData.email);
+  const [contact, setContact] = useState(userData.contact);
+  const [address1, setAddress1] = useState(userData.address1);
+  const [address2, setAddress2] = useState(userData.address2);
 
   const [errorMsg, setErrorMsg] = useState('');
   const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(null);
   const [open, setOpen] = useState(false);
 
-  const handleClearForm = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setContact('');
-    setAddress1('');
-    setAddress2('');
-  };
+  const handleUpdate = async () => {
+    try {
+      const updatedUser = {
+        ...userData,
+        firstName,
+        lastName,
+        email,
+        contact,
+        address1,
+        address2,
+      };
+      await updateUser(updatedUser);
 
-  const handleRegister = async () => {
-    if (password === confirmPassword) {
+      setOpen(true);
+      setAlertType('success');
+      setErrorMsg('User information updated successfully! Loading update...');
 
-      try {
-        const input = {
-          firstName,
-          lastName,
-          email,
-          password,
-          contact,
-          address1,
-          address2,
-        };
-        await registerUser(input);
+      localStorage.setItem('myUser', JSON.stringify([updatedUser]));
 
-        handleClearForm();
-       
-        setOpen(true);
-        setAlertType('success');
-        setErrorMsg('Account successully registered! Login to continue');
+      const myUser = JSON.parse(localStorage.getItem('myUser') as string);
 
-        // Navigate back to login page 
-        navigate('/login');
-      }
-      catch (error: any) {
-        console.log('reg err:', error.message);
-        setOpen(true);
-        setAlertType('error');
-        setErrorMsg('Registration Failed! Enter details correctly.');
-      }
-    } else {
+      console.log('updated:', myUser[0]);
+
+    //  onEditToggle();
+     // return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
+
+      setTimeout(() => {
+        onEditToggle();
+        return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
+      }, 6000);
+
+    } catch (error: any) {
       setOpen(true);
       setAlertType('error');
-      setErrorMsg('Password does not match! Try again.');
+      setErrorMsg('Failed to update user information');
+      console.log("error: ", error);
     }
-  }
+  };
+
 
   return (
-    <Container >
+    <Container>
       <MyAlert
-        open={open ?? true}
+        open={open ?? false}
         alertType={alertType ?? 'info'}
-        message={errorMsg ?? 'Please Register to continue your order.'}
+        message={errorMsg ?? 'Please Login to continue your order.'}
       />
-      <div className='register'>
+      <div className='update-user'>
         <div className='orangeBox'>
           <div className='header'>
-            <h1>HEY THERE!</h1>
+            <h1>Update Your Information</h1>
           </div>
           <div className='subHeader'>
-            <h4>Enter your details to register.</h4>
+            <h4>Edit your details below:</h4>
           </div>
-          <div >
-            <img className='pizzaIcon' src='/pizza-icon.png' alt='pizza icon' />
-          </div>
-
           <div>
             <form className='form'>
 
@@ -151,7 +138,7 @@ export default function Register() {
                     autoComplete="current-email"
                     variant="filled"
                     className='customTextField'
-                    required
+                    disabled
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -164,52 +151,6 @@ export default function Register() {
                     }}
                   />
                 </div>
-                <div className='form-input'>
-                  <TextField
-                    value={password}
-                    id="filled-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setPassword(event.target.value);
-                    }}
-                  />
-                </div>
-                <div className='form-input'>
-                  <TextField
-                    value={confirmPassword}
-                    id="filled-confirmPassword-input"
-                    label="Confirm Password"
-                    type="password"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setConfirmPassword(event.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className='form-right'>
                 <div className='form-input'>
                   <TextField
                     value={contact}
@@ -231,6 +172,9 @@ export default function Register() {
                     }}
                   />
                 </div>
+              </div>
+
+              <div className='form-right'>
                 <div className='form-input'>
                   <TextField
                     value={address1}
@@ -274,24 +218,25 @@ export default function Register() {
                     }}
                   />
                 </div>
-                <Button className="login-button"
+                <Button className="update-button"
                   variant='contained' size='large'
-                  onClick={handleRegister}>
-                  Register
+                  onClick={handleUpdate}>
+                  Update
                 </Button>
-                <div className='bottomText'>
-                  <h5>Already Registered? <NavLink className='link' to='/login'> Login  </NavLink></h5>
-                </div>
+                <Button className="cancel-button"
+                  variant='contained' size='large'
+                  onClick={onEditToggle}>
+                  Cancel
+                </Button>
               </div>
-
-
             </form>
           </div>
-
         </div>
 
-        <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
+        <img className="update-pizza-bg" src='/pizza-4.png' alt="pizza-bg2" />
       </div>
     </Container>
   );
-}
+};
+
+export default UpdateUser;

@@ -1,4 +1,14 @@
+  
 import { ECheese, EMeat, ESauce, EVeggie } from './enums';
+
+export interface User {
+    email:string;
+    firstName?: string;
+    lastName?: string;
+    address1?: string;
+    address2?: string;
+    contact?: string;
+  }
 
 export interface Ingredient<IngredientEnum> {
   key: IngredientEnum;
@@ -10,4 +20,10 @@ export interface Pizza {
   cheese: ECheese;
   meats?: EMeat[];
   veggies?: EVeggie[];
+}
+
+export interface MyAlertProps {
+  open: boolean;
+  alertType: 'success' | 'error' | 'warning' | 'info';
+  message: string;
 }
