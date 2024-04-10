@@ -18,12 +18,8 @@ const navLinks = [
   },
   {
     href: '/login',
-    label: 'Login',
+    label: 'Account',
   }, 
-  {
-    href: '/user',
-    label: 'User',
-  },
 ];
 
 export default function Header() {
