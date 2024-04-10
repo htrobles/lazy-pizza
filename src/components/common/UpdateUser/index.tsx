@@ -40,8 +40,10 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
         address2,
       };
       await updateUser(updatedUser);
-      setErrorMsg('User information updated successfully!');
+
       setOpen(true);
+      setAlertType('success');
+      setErrorMsg('User information updated successfully! Loading update...');
 
       localStorage.setItem('myUser', JSON.stringify([updatedUser]));
 
@@ -49,15 +51,13 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
 
       console.log('updated:', myUser[0]);
 
-      setOpen(true);
-      setAlertType('success');
-      setErrorMsg('User Update Successful!');
+    //  onEditToggle();
+     // return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
 
-      // Call onEditToggle to close the edit mode
-      onEditToggle();
-
-      // Navigate back to login page with isLoggedIn=true
-      return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
+      setTimeout(() => {
+        onEditToggle();
+        return <Navigate to="/login" state={{ isLoggedIn: true, userData: myUser[0] }} />;
+      }, 6000);
 
     } catch (error: any) {
       setOpen(true);
@@ -71,7 +71,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ userData, onEditToggle }) => {
   return (
     <Container>
       <MyAlert
-        open={open ?? true}
+        open={open ?? false}
         alertType={alertType ?? 'info'}
         message={errorMsg ?? 'Please Login to continue your order.'}
       />
