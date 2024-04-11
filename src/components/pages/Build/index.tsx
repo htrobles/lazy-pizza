@@ -7,6 +7,7 @@ import {
   Container,
   Grid,
   Icon,
+  Link,
   Radio,
   RadioGroup,
   Snackbar,
@@ -16,87 +17,13 @@ import PizzaPreview from '../../common/PizzaPreview';
 import { ECheese, EMeat, ESauce, EVeggie } from '../../../enums';
 import { useNavigate } from 'react-router-dom';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-
-const sauceChoices = [
-  {
-    key: ESauce.tomato,
-    label: 'Tomato',
-  },
-  {
-    key: ESauce.alfredo,
-    label: 'Alfredo',
-  },
-];
-
-const cheeseChoices = [
-  {
-    key: ECheese.mozzarella,
-    label: 'Mozzarella',
-  },
-  {
-    key: ECheese.cheddar,
-    label: 'Cheddar',
-  },
-  {
-    key: ECheese.parmesan,
-    label: 'Parmesan',
-  },
-];
-
-const meatChoices = [
-  {
-    key: EMeat.pepperoni,
-    label: 'Pepperoni',
-  },
-  {
-    key: EMeat.ham,
-    label: 'Ham',
-  },
-  {
-    key: EMeat.bacon,
-    label: 'Bacon',
-  },
-  {
-    key: EMeat.chicken,
-    label: 'Chicken',
-  },
-  {
-    key: EMeat.shrimp,
-    label: 'Shrimp',
-  },
-];
-
-const veggieChoices = [
-  {
-    key: EVeggie.tomatoes,
-    label: 'Tomatoes',
-  },
-  {
-    key: EVeggie.onions,
-    label: 'Onions',
-  },
-  {
-    key: EVeggie.bell_peppers,
-    label: 'Bell Peppers',
-  },
-  {
-    key: EVeggie.mushrooms,
-    label: 'Mushrooms',
-  },
-  {
-    key: EVeggie.black_olives,
-    label: 'Black Olives',
-  },
-  {
-    key: EVeggie.pineapples,
-    label: 'Pineapples',
-  },
-];
-
-interface AlertType {
-  type: 'error' | 'success';
-  message: string;
-}
+import {
+  AlertType,
+  cheeseChoices,
+  meatChoices,
+  sauceChoices,
+  veggieChoices,
+} from '../../../ingredients';
 
 export default function Build() {
   const [sauce, setSauce] = useState<ESauce>(ESauce.tomato);
@@ -190,6 +117,7 @@ export default function Build() {
               />
               <div className='cta'>
                 <h2>Pizza looks good?</h2>
+                <div className='actions'></div>
                 <Button
                   variant='contained'
                   size='large'
@@ -197,7 +125,9 @@ export default function Build() {
                   onClick={handleAddtoCart}
                 >
                   Add to Cart
-                </Button>
+                </Button>{' '}
+                <p>or</p>
+                <Link href='/checkout'>Proceed to checkout</Link>
               </div>
             </Box>
           </Grid>
@@ -207,7 +137,7 @@ export default function Build() {
               <br />
               Start working on your Pizza!
             </h1>
-            <p>Add ingredients to your pizza</p>
+            <p>Add ingredients to your pizza. Base price is $10.00.</p>
             <div className='options'>
               <div className='option-section'>
                 <h3>Sauce</h3>

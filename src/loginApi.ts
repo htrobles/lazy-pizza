@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  Auth, UserCredential, signOut,
 } from 'firebase/auth';
 import {
   collection,
@@ -12,6 +13,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { auth, db } from './firebase';
+import { User } from './types';
 
 const usersCollection = collection(db, 'users');
 
@@ -28,7 +30,7 @@ export const loginUser = async (input: { email: string, password: string }) => {
     const userData = querySnapshot.docs[0].data();
 
     return userData;
-  } catch (error: any) { // explicitly type the error parameter
+  } catch (error: any) {
     console.log({ code: error.code, message: error.message });
     throw new Error('You have entered invalid credentials.');
   }
@@ -39,17 +41,17 @@ export const registerUser = async (input: {
   lastName: string,
   email: string,
   password: string,
-  confirmPassword: string,
   contact: string,
   address1: string,
   address2: string,
+  city: string,
+  province: string,
 }) => {
   try {
     const {
-      firstName, lastName, email, password, confirmPassword, contact, address1, address2,
+      firstName, lastName, email, password, contact, address1, address2, city, province,
     } = input;
 
-    // Check for existing username and email
     const userRef = doc(db, 'users', email);
     const docSnap = await getDoc(userRef);
 
@@ -57,7 +59,6 @@ export const registerUser = async (input: {
       throw new Error('Email already taken');
     }
 
-    // Create User
     const { user: newUser } = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -72,7 +73,8 @@ export const registerUser = async (input: {
         address1,
         address2,
         contact,
-        subId: newUser.uid,
+        city,
+        province,
       });
     }
   } catch (error: any) { // explicitly type the error parameter
@@ -88,10 +90,57 @@ export const registerUser = async (input: {
   }
 };
 
-export const fetchUser = async (email: string) => {
+export const fetchUser = async (email: string): Promise<User | null> => {
   const userRef = doc(db, 'users', email);
+  const userDoc = await getDoc(userRef);
 
-  const user = await getDoc(userRef);
+  if (!userDoc.exists()) {
+    return null; // Return null if the document does not exist
+  }
+  
+  const userData = userDoc.data(); 
 
-  return { ...user.data(), id: email };
+  const user: User = {
+    email,
+    firstName: userData.firstName || '', 
+    lastName: userData.lastName || '', 
+    contact: userData.contact || '', 
+    address1: userData.address1 || '', 
+    address2: userData.address2 || '', 
+    city: userData.city || '', 
+    province: userData.city || '',
+  };
+
+  return user;
+};
+
+export const logoutUser = async (): Promise<void> => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error('Logout error:', error);
+    throw new Error('Failed to logout');
+  }
+};
+
+export const updateUser = async (input: {
+  email: string,
+  firstName: string,
+  lastName:string,
+  contact: string,
+  address1: string,
+  address2: string,
+  city: string,
+  province: string,
+}): Promise<void> => {
+  try {
+    const {
+      email, firstName, lastName, contact, address1, address2, city, province,
+    } = input;
+    const userRef = doc(db, 'users', email);
+    await setDoc(userRef, input, { merge: true });
+  } catch (error) {
+    console.error('Update user error:', error);
+    throw new Error('Failed to update user');
+  }
 };

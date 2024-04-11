@@ -35,6 +35,7 @@ export default function PizzaPreview({
       {meats?.length
         ? meats.map((meat) => (
             <img
+              key={meat}
               className='pizza-ingredient topping'
               src={`/builder/topping-meat-${meat}.png`}
               alt='pizza crust'
@@ -44,6 +45,7 @@ export default function PizzaPreview({
       {veggies?.length
         ? veggies.map((veggie) => (
             <img
+              key={veggie}
               className='pizza-ingredient topping'
               src={`/builder/topping-veggies-${veggie}.png`}
               alt='pizza crust'
