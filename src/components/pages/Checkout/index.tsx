@@ -6,7 +6,6 @@ import CartItem, { CartItemType } from './CartItem';
 import PaymentForm, { FormInputType } from './PaymentForm';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../../firebase';
-import useProfile from '../../../hooks/useProfile';
 
 const getPizzaPrice = ({ meats, veggies }: Pizza) => {
   const meatPrice = (meats?.length || 0) * 1.25;
@@ -21,7 +20,6 @@ interface Message {
 }
 
 export default function Checkout() {
-  const { myProfile } = useProfile();
   const navigate = useNavigate();
   const [alert, setAlert] = useState<Message | null>();
 
@@ -67,6 +65,7 @@ export default function Checkout() {
       expiry,
       cvv,
       paymentType,
+      email,
     } = input;
 
     if (!line1 || !line2 || !city || !province) {
@@ -85,7 +84,6 @@ export default function Checkout() {
     const data = {
       items: cart,
       total: total,
-      email: myProfile?.email,
       address: {
         line1,
         line2,
@@ -94,6 +92,8 @@ export default function Checkout() {
       },
       orderDate: new Date().toISOString(),
       paymentType,
+      status: 'pending',
+      email,
     };
 
     const docRef = await addDoc(collection(db, 'orders'), data);

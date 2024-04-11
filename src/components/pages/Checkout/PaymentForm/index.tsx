@@ -14,6 +14,7 @@ export interface FormInputType {
   cardNumber?: string;
   expiry?: string;
   cvv?: string;
+  email: string;
 }
 
 interface PaymentFormProps {
@@ -30,6 +31,7 @@ export default function PaymentForm({ onSubmit, total }: PaymentFormProps) {
   const [cardNumber, setCardNumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvv, setCvv] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = () => {
     const input = {
@@ -41,6 +43,7 @@ export default function PaymentForm({ onSubmit, total }: PaymentFormProps) {
       cardNumber,
       expiry,
       cvv,
+      email,
     };
 
     const res = onSubmit(input);
@@ -76,6 +79,16 @@ export default function PaymentForm({ onSubmit, total }: PaymentFormProps) {
               <span>Cash</span>
             </div>
           </RadioGroup>
+        </div>
+        <div className='form-group'>
+          <label className='form-group-label'>E-mail Address</label>
+          <input
+            className='form-group-input'
+            name='email'
+            placeholder='e-mail address'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className='form-group'>
           <label className='form-group-label'>Address</label>
