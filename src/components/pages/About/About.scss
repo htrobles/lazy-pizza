@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+    .about{
+        height: calc(100vh - 160px);
+        position: relative;
+        .header {
+            margin-top: 10px;
+        
+            h1 {
+                color: rgba(225, 92, 49, 0.9);
+                margin: 0;
+                font-family: 'Montserrat';
+                font-size: 180px;
+                text-align: center;
+                font-weight: bold;
+            }
+            h2{
+                margin: 0;
+                font-family: 'Bebas Neue';
+                font-size: 40px;
+                text-align: center;
+            }
+        }
+        .orangeBox {
+            background-color: rgba(225, 92, 49, 0.9);
+            height: 500px;
+            max-height: 500px;
+            max-width: 1200px;
+            border-radius: 20px;
+            position: relative;
+            padding: 20px;
+            margin-top: 150px;
+        }
+        
+        .pizzaIcon {
+            width: 300px;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* Adjust the z-index as needed */
+        }
+        .pizza-1{
+            width: 280px;
+            height: 470px;
+            border-radius: 30px;
+        }
+        .content {
+            margin-top: -100px;
+            text-align: center;
+
+            .content-h1 {
+                color: #ffff;
+                margin: 0;
+                font-family: 'Bebas Neue';
+                font-size: 60px;
+                text-align: center;
+                margin-top: 40px;
+                margin-bottom: 40px;
+            }
+
+            p {
+                color: #ffff;
+                margin: 0;
+                font-family: 'montserrat';
+                font-size: 20px;
+                text-align: justify;
+                width: 80%;
+                margin-left: 70px;
+            }
+
+        }
+        .pizza-steps-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 2fr); 
+            gap: 20px; 
+            grid-template-rows: auto auto; 
+        
+            img {
+            width: 80%;
+            height: auto;
+            border-radius: 10px; 
+            }
+            
+        }
+
+        @media only screen and (max-width: 768px) {
+            .header h1 {
+                font-size: 100px;
+            }
+            .orangeBox {
+                padding: 10px;
+                box-sizing: border-box; 
+            }
+        
+            .orangeBox .header {
+                text-align: center; 
+            }
+        
+            .content-h1 {
+                font-size: 30px !important;
+            }
+
+            .content p {
+                font-size:12px !important;
+                margin-left: 30px;
+            }
+        
+            .pizzaIcon {
+                width: 200px;
+                height: 100px; 
+            }
+        
+            .pizza-1 {
+                width: 40%; 
+                height: auto;
+                margin-bottom: 200px;
+            }
+        
+            .content {
+                margin-top: 20px; /* Add margin to top of content */
+            }
+        
+            .content p {
+                font-size: 14px; /* Adjust font size for p */
+            }
+        }
+        
+    }
