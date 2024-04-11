@@ -1,0 +1,20 @@
+.drawer {
+  // background-color: rgba($color: #e15c31, $alpha: 0.23);
+  // flex: 1;
+
+  .nav-link {
+    color: '#fff';
+    text-decoration: none;
+    border-right: 5px solid transparent;
+    padding-right: 20px;
+    transition: border 0.2s ease-out;
+
+    &:visited {
+      color: #fff;
+    }
+
+    &.active {
+      border-right-color: #fff;
+    }
+  }
+}

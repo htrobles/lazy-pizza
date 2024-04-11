@@ -1,5 +1,12 @@
-  
+import { CartItemType } from './components/pages/Checkout/CartItem';
 import { ECheese, EMeat, ESauce, EVeggie } from './enums';
+
+export interface Address {
+  line1: string;
+  line2: string;
+  city: string;
+  province: string;
+}
 
 export interface User {
     email:string;
@@ -28,4 +35,14 @@ export interface MyAlertProps {
   open: boolean;
   alertType: 'success' | 'error' | 'warning' | 'info';
   message: string;
+}
+
+export interface Order {
+  email: string;
+  id: string;
+  items: CartItemType[];
+  total: number;
+  address: Address;
+  orderDate: string;
+  paymentType: string;
 }

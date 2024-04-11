@@ -17,7 +17,7 @@ export interface FormInputType {
 }
 
 interface PaymentFormProps {
-  onSubmit: (input: FormInputType) => boolean;
+  onSubmit: (input: FormInputType) => Promise<boolean>;
   total: number;
 }
 

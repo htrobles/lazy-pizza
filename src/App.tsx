@@ -8,6 +8,7 @@ import { ThemeProvider } from '@emotion/react';
 import theme from './theme';
 import { User } from './types';
 import { AuthContext } from './context/AuthContext';
+import AppDrawer from './components/common/AppDrawer';
 
 function App() {
   const profileStr = localStorage.getItem('myProfile');
@@ -17,19 +18,21 @@ function App() {
   }
 
   const [myProfile, setMyProfile] = useState(parsedProfile);
+  const [showDrawer, setShowDrawer] = useState(false);
 
   return (
     <AuthContext.Provider value={{ myProfile, setMyProfile }}>
-      <ThemeProvider theme={theme}>
-        <main>
-          <Header />
-          <div className='content'>
-            <BrowserRouter>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <main>
+            <AppDrawer showDrawer={showDrawer} onCloseDrawer={setShowDrawer} />
+            <Header showDrawer={showDrawer} onCloseDrawer={setShowDrawer} />
+            <div className='content'>
               <AppRoutes />
-            </BrowserRouter>
-          </div>
-        </main>
-      </ThemeProvider>
+            </div>
+          </main>
+        </ThemeProvider>
+      </BrowserRouter>
     </AuthContext.Provider>
   );
 }

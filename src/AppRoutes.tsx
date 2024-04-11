@@ -8,6 +8,7 @@ import Checkout from './components/pages/Checkout';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
+import Order from './components/pages/Order';
 
 const appRoutes = [
   {
@@ -49,6 +50,11 @@ const appRoutes = [
     key: 'Profile',
     path: '/profile',
     element: <Profile />,
+  },
+  {
+    key: 'Order',
+    path: '/orders/:orderId',
+    element: <Order />,
   },
 ];
 

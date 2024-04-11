@@ -7,6 +7,7 @@ import {
   Container,
   Grid,
   Icon,
+  Link,
   Radio,
   RadioGroup,
   Snackbar,
@@ -116,6 +117,7 @@ export default function Build() {
               />
               <div className='cta'>
                 <h2>Pizza looks good?</h2>
+                <div className='actions'></div>
                 <Button
                   variant='contained'
                   size='large'
@@ -123,7 +125,9 @@ export default function Build() {
                   onClick={handleAddtoCart}
                 >
                   Add to Cart
-                </Button>
+                </Button>{' '}
+                <p>or</p>
+                <Link href='/checkout'>Proceed to checkout</Link>
               </div>
             </Box>
           </Grid>
@@ -133,7 +137,7 @@ export default function Build() {
               <br />
               Start working on your Pizza!
             </h1>
-            <p>Add ingredients to your pizza</p>
+            <p>Add ingredients to your pizza. Base price is $10.00.</p>
             <div className='options'>
               <div className='option-section'>
                 <h3>Sauce</h3>

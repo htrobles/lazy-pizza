@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { Alert, Container, Grid, Snackbar } from '@mui/material';
 import CartItem, { CartItemType } from './CartItem';
 import PaymentForm, { FormInputType } from './PaymentForm';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../../firebase';
+import useProfile from '../../../hooks/useProfile';
 
 const getPizzaPrice = ({ meats, veggies }: Pizza) => {
   const meatPrice = (meats?.length || 0) * 1.25;
   const veggiesPrice = (veggies?.length || 0) * 0.75;
 
-  return meatPrice + veggiesPrice;
+  return meatPrice + veggiesPrice + 10;
 };
 
 interface Message {
@@ -18,13 +21,13 @@ interface Message {
 }
 
 export default function Checkout() {
+  const { myProfile } = useProfile();
   const navigate = useNavigate();
   const [alert, setAlert] = useState<Message | null>();
 
   const cartPizzas: CartItemType[] = localStorage.getItem('cart')
     ? JSON.parse(localStorage.getItem('cart') as string).map(
-        (pizza: Pizza, index: number) => ({
-          index,
+        (pizza: Pizza) => ({
           pizza,
           price: getPizzaPrice(pizza),
         })
@@ -52,8 +55,9 @@ export default function Checkout() {
     return null;
   }
 
-  const handleSubmit = (input: FormInputType) => {
-    console.log(input);
+  const total = cart.reduce((prev, curr) => prev + curr.price, 0);
+
+  const handleSubmit = async (input: FormInputType) => {
     const {
       line1,
       line2,
@@ -78,6 +82,26 @@ export default function Checkout() {
       return false;
     }
 
+    const data = {
+      items: cart,
+      total: total,
+      email: myProfile?.email,
+      address: {
+        line1,
+        line2,
+        city,
+        province,
+      },
+      orderDate: new Date().toISOString(),
+      paymentType,
+    };
+
+    const docRef = await addDoc(collection(db, 'orders'), data);
+
+    localStorage.removeItem('cart');
+
+    navigate(`/orders/${docRef.id}`);
+
     setAlert({
       type: 'success',
       message: 'Your order has been placed. Thank you!',
@@ -86,24 +110,11 @@ export default function Checkout() {
     return true;
   };
 
-  const handleCloseAlert = () => {
-    const isSuccess = alert?.type === 'success';
-
-    setAlert(null);
-
-    if (isSuccess) {
-      // localStorage.removeItem('cart');
-      // navigate('/my-ordersd');
-    }
-  };
-
-  const total = cart.reduce((prev, curr) => prev + curr.price, 0);
-
   return (
     <Container>
       <Snackbar
         open={!!alert}
-        onClose={handleCloseAlert}
+        onClose={() => setAlert(null)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         autoHideDuration={5000}
       >
@@ -127,6 +138,7 @@ export default function Checkout() {
               key={`cart-item-${index}`}
               cartItem={cartItem}
               onRemove={handleRemovePizza}
+              index={index}
             />
           ))}
         </Grid>

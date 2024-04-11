@@ -17,7 +17,6 @@ const getPizzaIngredientLabels = (meats: EMeat[], veggies: EVeggie[]) => {
 };
 
 export interface CartItemType {
-  index: number;
   price: number;
   pizza: Pizza;
 }
@@ -25,14 +24,13 @@ export interface CartItemType {
 interface CartItemProps {
   cartItem: CartItemType;
   onRemove: (index: number) => void;
+  index: number;
 }
 
-export default function CartItem({ cartItem, onRemove }: CartItemProps) {
-  const { pizza, index, price } = cartItem;
+export default function CartItem({ cartItem, onRemove, index }: CartItemProps) {
+  const { pizza, price } = cartItem;
 
   const { sauce, cheese, meats, veggies } = pizza;
-
-  console.log(price);
 
   return (
     <div className='pizza-container'>

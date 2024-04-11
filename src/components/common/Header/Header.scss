@@ -16,7 +16,7 @@ header {
   }
 
   .nav {
-    display: hidden;
+    display: none;
     list-style: none;
   }
 
@@ -24,6 +24,13 @@ header {
     a {
       color: #fff;
       text-decoration: none;
+      border-bottom: 5px solid transparent;
+      padding-bottom: 5px;
+      transition: border 0.2s ease-out;
+
+      &.active {
+        border-bottom-color: #e15c31;
+      }
     }
   }
 
@@ -31,6 +38,10 @@ header {
     .nav {
       display: flex;
       gap: 20px;
+    }
+
+    .drawer-button {
+      display: none;
     }
   }
 }
