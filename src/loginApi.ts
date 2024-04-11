@@ -44,10 +44,12 @@ export const registerUser = async (input: {
   contact: string,
   address1: string,
   address2: string,
+  city: string,
+  province: string,
 }) => {
   try {
     const {
-      firstName, lastName, email, password, contact, address1, address2,
+      firstName, lastName, email, password, contact, address1, address2, city, province,
     } = input;
 
     const userRef = doc(db, 'users', email);
@@ -71,7 +73,8 @@ export const registerUser = async (input: {
         address1,
         address2,
         contact,
-        subId: newUser.uid,
+        city,
+        province,
       });
     }
   } catch (error: any) { // explicitly type the error parameter
@@ -104,6 +107,8 @@ export const fetchUser = async (email: string): Promise<User | null> => {
     contact: userData.contact || '', 
     address1: userData.address1 || '', 
     address2: userData.address2 || '', 
+    city: userData.city || '', 
+    province: userData.city || '',
   };
 
   return user;
@@ -125,10 +130,12 @@ export const updateUser = async (input: {
   contact: string,
   address1: string,
   address2: string,
+  city: string,
+  province: string,
 }): Promise<void> => {
   try {
     const {
-      email, firstName, lastName, contact, address1, address2,
+      email, firstName, lastName, contact, address1, address2, city, province,
     } = input;
     const userRef = doc(db, 'users', email);
     await setDoc(userRef, input, { merge: true });

@@ -7,7 +7,7 @@ import Contact from './components/pages/Contact';
 import Checkout from './components/pages/Checkout';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
-import Profile from './components/common/Profile';
+import Profile from './components/pages/Profile';
 
 const appRoutes = [
   {

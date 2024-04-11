@@ -1,18 +1,18 @@
 .register {
     height: calc(100vh - 160px);
     overflow-y: hidden;
-    overflow-x: auto;
+    overflow-x: hidden;
     position: relative;
-
+    margin: 0 auto; 
     .orangeBox {
         background-color: rgba(225, 92, 49, 0.9);
-        height: 500px;
-        max-height: 500px;
+        height: fit-content;
+        //max-height: 500px;
         max-width: 950px;
         border-radius: 16px;
         position: relative;
         padding: 20px;
-        margin-left: 120px;
+        margin: 0 auto; 
     }
 
     .header {
@@ -34,11 +34,12 @@
     }
 
     .pizzaIcon {
-        width: 350px;
+        width: 30vw;
+        max-width: 380px;
         z-index: +1;
         position: absolute;
         top: 0px;
-        right: -100px;
+        right: -8vw;
     }
 
     .bottomText {
@@ -55,34 +56,12 @@
     }
 
     .form {
-        display: flex;
-        flex-direction: row;
-        margin-top: 4vh;
         justify-content: center;
         align-content: center;
         text-align: center;
-        flex-wrap: wrap;
 
-        .form-left {
-            flex: 1;
-            margin-top: 0;
-
-            .form-input {
-                margin-top: 12px;
-                margin-bottom: 10px;
-                margin-right: 40px;
-            }
-        }
-
-        .form-right {
-            flex: 1;
-            margin-top: 30px;
-
-            .form-input {
-                margin-top: 12px;
-                margin-bottom: 10px;
-            }
-
+        .form-input{
+            max-width: 100%;
         }
 
         .login-button {
@@ -120,15 +99,105 @@
         height: 140vh;
         position: absolute;
         top: 0%;
-        left: 45%;
+        left: 50%;
         transform: translateX(-50%);
     }
 
-    @media (max-width: 768px) {
+    @media (min-width: 768px) {
+        .register {
+            height: fit-content;
+            overflow-y: auto;
+        }
 
-        .orangeBox {
-            margin: 0 auto;
+        .form {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            .form-left {
+                flex: 1;
+                margin-top: 0;
+
+                .form-input-password {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .form-input {
+                        flex: 1;
+                        margin: 0 5px;
+                        width: 50%;
+                    }
+                }
+
+                .form-input {
+                    margin: 6px 6px;
+                }
+            }
+
+            .form-right {
+                flex: 1;
+                margin-top: 30px;
+
+                .form-input-cp {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .form-input {
+                        flex: 1;
+                        margin: 0 5px;
+                        width: 50%;
+                    }
+                }
+
+                .form-input {
+                    margin: 6px 6px;
+                }
+
+            }
         }
     }
 
+    @media (max-width: 768px) {
+        .register {
+            height: fit-content;
+            overflow-y: auto;
+        }
+        .orangeBox {
+            margin: 0 auto;
+        }
+        .pizzaIcon {
+            width: 150px;
+            z-index: +1;
+            position: absolute;
+            top: +10px;
+            right: +20px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+
+            .form-left,
+            .form-right {
+                flex: 1;
+                margin: 4px;
+                .form-input-cp,
+                .form-input-password {
+                    display: flex;
+                    flex-direction: column;
+                }
+                
+                .form-input {
+                    margin: 4px;
+                    max-width: 100%;
+                }
+            }
+
+        }
+    }
 }

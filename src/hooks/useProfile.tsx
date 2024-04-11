@@ -10,13 +10,15 @@ interface LoginInput {
   password: string;
 }
 
-interface UpdateProfileInput {
+export interface UpdateProfileInput {
   email: string;
   firstName: string;
   lastName: string;
   contact: string;
   address1: string;
   address2: string;
+  city: string;
+  province: string;
 }
 
 export default function useProfile() {

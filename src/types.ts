@@ -8,6 +8,8 @@ export interface User {
     address1?: string;
     address2?: string;
     contact?: string;
+    city?: string;
+    province?: string;
   }
 
 export interface Ingredient<IngredientEnum> {

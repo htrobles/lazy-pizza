@@ -5,6 +5,8 @@ import PasswordIcon from '@mui/icons-material/Password';
 import BadgeIcon from '@mui/icons-material/Badge';
 import CallIcon from '@mui/icons-material/Call';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MapIcon from '@mui/icons-material/Map';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import './Register.scss';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -24,6 +26,8 @@ export default function Register() {
   const [contact, setContact] = useState('');
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
+  const [city, setCity] = useState('');
+  const [province, setProvince] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('');
   const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(null);
@@ -38,6 +42,8 @@ export default function Register() {
     setContact('');
     setAddress1('');
     setAddress2('');
+    setCity('');
+    setProvince('');
   };
 
   const handleRegister = async () => {
@@ -52,11 +58,13 @@ export default function Register() {
           contact,
           address1,
           address2,
+          city,
+          province,
         };
         await registerUser(input);
 
         handleClearForm();
-       
+
         setOpen(true);
         setAlertType('success');
         setErrorMsg('Account successully registered! Login to continue');
@@ -78,13 +86,14 @@ export default function Register() {
   }
 
   return (
-    <Container >
-      <MyAlert
-        open={open ?? true}
-        alertType={alertType ?? 'info'}
-        message={errorMsg ?? 'Please Register to continue your order.'}
-      />
-      <div className='register'>
+    <div className='register'>
+      <Container >
+        <MyAlert
+          open={open ?? true}
+          alertType={alertType ?? 'info'}
+          message={errorMsg ?? 'Please Register to continue your order.'}
+        />
+
         <div className='orangeBox'>
           <div className='header'>
             <h1>HEY THERE!</h1>
@@ -144,6 +153,27 @@ export default function Register() {
                 </div>
                 <div className='form-input'>
                   <TextField
+                    value={contact}
+                    id="filled-contact-input"
+                    label="Contact Number"
+                    type="phone"
+                    variant="filled"
+                    className='customTextField'
+                    required
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <CallIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setContact(event.target.value);
+                    }}
+                  />
+                </div>
+                <div className='form-input'>
+                  <TextField
                     value={email}
                     id="filled-email-input"
                     label="Email"
@@ -164,73 +194,54 @@ export default function Register() {
                     }}
                   />
                 </div>
-                <div className='form-input'>
-                  <TextField
-                    value={password}
-                    id="filled-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setPassword(event.target.value);
-                    }}
-                  />
-                </div>
-                <div className='form-input'>
-                  <TextField
-                    value={confirmPassword}
-                    id="filled-confirmPassword-input"
-                    label="Confirm Password"
-                    type="password"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PasswordIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setConfirmPassword(event.target.value);
-                    }}
-                  />
+                <div className='form-input-password'>
+                  <div className='form-input'>
+                    <TextField
+                      value={password}
+                      id="filled-password-input"
+                      label="Password"
+                      type="password"
+                      autoComplete="current-password"
+                      variant="filled"
+                      className='customTextField'
+                      required
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PasswordIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setPassword(event.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className='form-input'>
+                    <TextField
+                      value={confirmPassword}
+                      id="filled-confirmPassword-input"
+                      label="Confirm Password"
+                      type="password"
+                      variant="filled"
+                      className='customTextField'
+                      required
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PasswordIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setConfirmPassword(event.target.value);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
 
               <div className='form-right'>
-                <div className='form-input'>
-                  <TextField
-                    value={contact}
-                    id="filled-contact-input"
-                    label="Contact Number"
-                    type="phone"
-                    variant="filled"
-                    className='customTextField'
-                    required
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <CallIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      setContact(event.target.value);
-                    }}
-                  />
-                </div>
                 <div className='form-input'>
                   <TextField
                     value={address1}
@@ -274,11 +285,59 @@ export default function Register() {
                     }}
                   />
                 </div>
-                <Button className="login-button"
-                  variant='contained' size='large'
-                  onClick={handleRegister}>
-                  Register
-                </Button>
+                <div className='form-input-cp'>
+                  <div className='form-input'>
+                    <TextField
+                      value={city}
+                      id='filled-city-input'
+                      label='City'
+                      type='address'
+                      autoComplete='current-city'
+                      variant='filled'
+                      className='customTextField'
+                      required
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position='start'>
+                            <LocationCityIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setCity(event.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className='form-input'>
+                    <TextField
+                      value={province}
+                      id='filled-province-input'
+                      label='Province'
+                      type='address'
+                      autoComplete='current-province'
+                      variant='filled'
+                      className='customTextField'
+                      required
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position='start'>
+                            <MapIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setProvince(event.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className='button-container'>
+                  <Button className="login-button"
+                    variant='contained' size='large'
+                    onClick={handleRegister}>
+                    Register
+                  </Button>
+                </div>
                 <div className='bottomText'>
                   <h5>Already Registered? <NavLink className='link' to='/login'> Login  </NavLink></h5>
                 </div>
@@ -290,8 +349,9 @@ export default function Register() {
 
         </div>
 
-        <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
-      </div>
-    </Container>
+
+      </Container>
+      <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
+    </div>
   );
 }
