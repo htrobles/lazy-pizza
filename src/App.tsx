@@ -22,17 +22,17 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ myProfile, setMyProfile }}>
-      <ThemeProvider theme={theme}>
-        <main>
-          <AppDrawer showDrawer={showDrawer} onCloseDrawer={setShowDrawer} />
-          <Header showDrawer={showDrawer} onCloseDrawer={setShowDrawer} />
-          <div className='content'>
-            <BrowserRouter>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <main>
+            <AppDrawer showDrawer={showDrawer} onCloseDrawer={setShowDrawer} />
+            <Header showDrawer={showDrawer} onCloseDrawer={setShowDrawer} />
+            <div className='content'>
               <AppRoutes />
-            </BrowserRouter>
-          </div>
-        </main>
-      </ThemeProvider>
+            </div>
+          </main>
+        </ThemeProvider>
+      </BrowserRouter>
     </AuthContext.Provider>
   );
 }

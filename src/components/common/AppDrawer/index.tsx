@@ -1,6 +1,7 @@
 import { Box, Drawer, List, ListItem } from '@mui/material';
 import useProfile from '../../../hooks/useProfile';
 import './AppDrawer.scss';
+import { NavLink } from 'react-router-dom';
 
 interface AppDrawerProps {
   showDrawer: boolean;
@@ -67,13 +68,13 @@ export default function AppDrawer({
         <List>
           {navLinks.map(({ href, label }, index) => (
             <ListItem key={href}>
-              <a
-                href={href}
+              <NavLink
+                to={href}
                 className='nav-link'
                 onClick={label === 'Logout' ? logout : undefined}
               >
                 {label}
-              </a>
+              </NavLink>
             </ListItem>
           ))}
         </List>

@@ -2,6 +2,7 @@ import './Header.scss';
 import useProfile from '../../../hooks/useProfile';
 import { Container, IconButton } from '@mui/material';
 import { MenuOutlined } from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
 
 interface HeaderProps {
   showDrawer: boolean;
@@ -61,13 +62,13 @@ export default function Header({ showDrawer, onCloseDrawer }: HeaderProps) {
         <ul className='nav'>
           {navLinks.map(({ href, label }) => (
             <li key={label} className='nav-item'>
-              <a
+              <NavLink
                 key={href}
-                href={href}
+                to={href}
                 onClick={label === 'Logout' ? logout : undefined}
               >
                 {label}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
