@@ -1,0 +1,13 @@
+.drawer {
+  // background-color: rgba($color: #e15c31, $alpha: 0.23);
+  // flex: 1;
+
+  .nav-link {
+    color: '#fff';
+    text-decoration: none;
+
+    &:visited {
+      color: #fff;
+    }
+  }
+}

@@ -1,14 +1,16 @@
-import './Header.scss';
+import { Box, Drawer, List, ListItem } from '@mui/material';
 import useProfile from '../../../hooks/useProfile';
-import { Container, IconButton } from '@mui/material';
-import { MenuOutlined } from '@mui/icons-material';
+import './AppDrawer.scss';
 
-interface HeaderProps {
+interface AppDrawerProps {
   showDrawer: boolean;
   onCloseDrawer: (value: boolean) => void;
 }
 
-export default function Header({ showDrawer, onCloseDrawer }: HeaderProps) {
+export default function AppDrawer({
+  showDrawer,
+  onCloseDrawer,
+}: AppDrawerProps) {
   const { myProfile, logout } = useProfile();
 
   const navLinks = [
@@ -49,37 +51,33 @@ export default function Header({ showDrawer, onCloseDrawer }: HeaderProps) {
   }
 
   return (
-    <header>
-      <Container className='container'>
-        <a href='/'>
-          <img
-            className='header-logo'
-            src='/logo-white.png'
-            alt='Lazy Pizza Logo'
-          />
-        </a>
-        <ul className='nav'>
-          {navLinks.map(({ href, label }) => (
-            <li key={label} className='nav-item'>
+    <Drawer
+      open={showDrawer}
+      onClose={() => {
+        onCloseDrawer(!showDrawer);
+      }}
+      PaperProps={{
+        style: {
+          backgroundColor: 'rgba(225, 92, 49, .8)',
+        },
+      }}
+      className='drawer'
+    >
+      <Box sx={{ width: 250, padding: 3 }} role='presentation'>
+        <List>
+          {navLinks.map(({ href, label }, index) => (
+            <ListItem key={href}>
               <a
-                key={href}
                 href={href}
+                className='nav-link'
                 onClick={label === 'Logout' ? logout : undefined}
               >
                 {label}
               </a>
-            </li>
+            </ListItem>
           ))}
-        </ul>
-        <div className='drawer-button'>
-          <IconButton
-            onClick={() => onCloseDrawer(!showDrawer)}
-            color='inherit'
-          >
-            <MenuOutlined />
-          </IconButton>
-        </div>
-      </Container>
-    </header>
+        </List>
+      </Box>
+    </Drawer>
   );
 }
