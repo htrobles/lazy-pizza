@@ -13,8 +13,7 @@
         position: relative;
         padding: 20px;
         margin-left: 45%;
-       
-
+    
     }
 
     .header {
@@ -161,67 +160,6 @@
 
         .pizzaIcon {
             width: 0px;
-        }
-    }
-
-}
-
-.profile {
-    height: calc(100vh - 160px);
-    overflow-y: hidden;
-    overflow-x: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: 100px;
-
-    .profile-box {
-        flex: 1;
-        margin-left: 0px;
-        width: 100%;
-    }
-
-    .profile-buttons {
-        flex: 1;
-        margin-top: 200px;
-        margin-left: 30px;
-
-        .edit-button {
-            align-self: center;
-            margin: 10px;
-            width: 50%;
-            background-color: white;
-            border-bottom: 2px solid black;
-            color: #E15C31;
-            font-family: 'Montserrat';
-            font-weight: 800;
-            font-size: 16px;
-
-            &:hover {
-                background-color: black;
-                border-bottom: 2px solid white;
-                letter-spacing: 4px;
-            }
-        }
-
-        .logout-button {
-            align-self: center;
-            margin: 10px;
-            width: 50%;
-            background-color: white;
-            border-bottom: 2px solid black;
-            color: black;
-            font-family: 'Montserrat';
-            font-weight: 800;
-            font-size: 16px;
-
-            &:hover {
-                background-color: black;
-                color: #E15C31;
-                border-bottom: 2px solid white;
-                letter-spacing: 4px;
-            }
         }
     }
 

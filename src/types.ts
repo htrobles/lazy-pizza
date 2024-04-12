@@ -9,13 +9,15 @@ export interface Address {
 }
 
 export interface User {
-  email: string;
-  firstName?: string;
-  lastName?: string;
-  address1?: string;
-  address2?: string;
-  contact?: string;
-}
+    email:string;
+    firstName?: string;
+    lastName?: string;
+    address1?: string;
+    address2?: string;
+    contact?: string;
+    city?: string;
+    province?: string;
+  }
 
 export interface Ingredient<IngredientEnum> {
   key: IngredientEnum;

@@ -1,4 +1,3 @@
-import { Padding } from '@mui/icons-material';
 import { createTheme } from '@mui/material';
 
 const theme = createTheme({
@@ -36,12 +35,6 @@ const theme = createTheme({
           '& .MuiInputAdornment-root': {
             paddingLeft: '4px',
           },
-          // '& .MuiInput-underline:before': {
-          //   borderBottom: 'none', 
-          // },
-          // '& .MuiInput-underline:after': {
-          //   borderBottom: 'none', 
-          // },
         }
       }
     }
