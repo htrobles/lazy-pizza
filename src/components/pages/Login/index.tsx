@@ -41,13 +41,8 @@ export default function Login() {
   };
 
   return (
-    <Container>
-      <MyAlert
-        open={open ?? true}
-        alertType={alertType ?? 'info'}
-        message={errorMsg ?? 'Please Login to continue your order.'}
-      />
-      <div className='login'>
+    <div className='login'>
+      <Container>
         <div className='orangeBox'>
           <img className='pizzaIcon' src='/pizza-icon.png' alt='pizza icon' />
 
@@ -123,8 +118,13 @@ export default function Login() {
             </form>
           </div>
         </div>
-        <img className='pizza-bg' src='/pizza-2.png' alt='pizza-bg2' />
-      </div>
-    </Container>
+      </Container>
+      <img className='pizza-bg' src='/pizza-2.png' alt='pizza-bg2' />
+      <MyAlert
+        open={open ?? true}
+        alertType={alertType ?? 'info'}
+        message={errorMsg ?? 'Please Login to continue your order.'}
+      />
+    </div>
   );
 }

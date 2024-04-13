@@ -20,8 +20,8 @@ const Profile = () => {
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditToggle = (errorMessage?:string) => {
-    setIsEditing(prevState => !prevState);
+  const handleEditToggle = (errorMessage?: string) => {
+    setIsEditing((prevState) => !prevState);
 
     setOpen(true);
     setAlertType('success');
@@ -41,7 +41,10 @@ const Profile = () => {
   return (
     <>
       {isEditing ? (
-        <UpdateUser onEditToggle={handleEditToggle} errorMessage={errorMsg as MyAlertProps['message']} />
+        <UpdateUser
+          onEditToggle={handleEditToggle}
+          errorMessage={errorMsg as MyAlertProps['message']}
+        />
       ) : (
         <div className='my-profile'>
           <Container>
@@ -100,15 +103,15 @@ const Profile = () => {
                   className='edit-button'
                   variant='contained'
                   size='large'
-                  onClick={() => handleEditToggle(errorMsg as MyAlertProps['message'])}
+                  onClick={() =>
+                    handleEditToggle(errorMsg as MyAlertProps['message'])
+                  }
                 >
                   Edit
                 </Button>
               </div>
             </div>
-
           </Container>
-          <img className='pizza-bg' src='/pizza-toss.png' alt='pizza-bg2' />
         </div>
       )}
     </>

@@ -14,7 +14,6 @@ import { registerUser } from '../../../loginApi';
 import { MyAlertProps } from '../../../types';
 import MyAlert from '../../common/MyAlert';
 
-
 export default function Register() {
   const navigate = useNavigate();
 
@@ -30,7 +29,9 @@ export default function Register() {
   const [province, setProvince] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('');
-  const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(null);
+  const [alertType, setAlertType] = useState<MyAlertProps['alertType'] | null>(
+    null
+  );
   const [open, setOpen] = useState(false);
 
   const handleClearForm = () => {
@@ -48,7 +49,6 @@ export default function Register() {
 
   const handleRegister = async () => {
     if (password === confirmPassword) {
-
       try {
         const input = {
           firstName,
@@ -69,10 +69,9 @@ export default function Register() {
         setAlertType('success');
         setErrorMsg('Account successully registered! Login to continue');
 
-        // Navigate back to login page 
+        // Navigate back to login page
         navigate('/login');
-      }
-      catch (error: any) {
+      } catch (error: any) {
         console.log('reg err:', error.message);
         setOpen(true);
         setAlertType('error');
@@ -83,11 +82,11 @@ export default function Register() {
       setAlertType('error');
       setErrorMsg('Password does not match! Try again.');
     }
-  }
+  };
 
   return (
     <div className='register'>
-      <Container >
+      <Container>
         <MyAlert
           open={open ?? true}
           alertType={alertType ?? 'info'}
@@ -101,26 +100,25 @@ export default function Register() {
           <div className='subHeader'>
             <h4>Enter your details to register.</h4>
           </div>
-          <div >
+          <div>
             <img className='pizzaIcon' src='/pizza-icon.png' alt='pizza icon' />
           </div>
 
           <div>
             <form className='form'>
-
               <div className='form-left'>
                 <div className='form-input'>
                   <TextField
                     value={firstName}
-                    id="filled-firstName-input"
-                    label="First Name"
-                    type="text"
-                    variant="filled"
+                    id='filled-firstName-input'
+                    label='First Name'
+                    type='text'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <BadgeIcon />
                         </InputAdornment>
                       ),
@@ -133,15 +131,15 @@ export default function Register() {
                 <div className='form-input'>
                   <TextField
                     value={lastName}
-                    id="filled-lastName-input"
-                    label="Last Name"
-                    type="text"
-                    variant="filled"
+                    id='filled-lastName-input'
+                    label='Last Name'
+                    type='text'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <BadgeIcon />
                         </InputAdornment>
                       ),
@@ -154,15 +152,15 @@ export default function Register() {
                 <div className='form-input'>
                   <TextField
                     value={contact}
-                    id="filled-contact-input"
-                    label="Contact Number"
-                    type="phone"
-                    variant="filled"
+                    id='filled-contact-input'
+                    label='Contact Number'
+                    type='phone'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <CallIcon />
                         </InputAdornment>
                       ),
@@ -175,16 +173,16 @@ export default function Register() {
                 <div className='form-input'>
                   <TextField
                     value={email}
-                    id="filled-email-input"
-                    label="Email"
-                    type="email"
-                    autoComplete="current-email"
-                    variant="filled"
+                    id='filled-email-input'
+                    label='Email'
+                    type='email'
+                    autoComplete='current-email'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <EmailIcon />
                         </InputAdornment>
                       ),
@@ -198,21 +196,23 @@ export default function Register() {
                   <div className='form-input'>
                     <TextField
                       value={password}
-                      id="filled-password-input"
-                      label="Password"
-                      type="password"
-                      autoComplete="current-password"
-                      variant="filled"
+                      id='filled-password-input'
+                      label='Password'
+                      type='password'
+                      autoComplete='current-password'
+                      variant='filled'
                       className='customTextField'
                       required
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
+                          <InputAdornment position='start'>
                             <PasswordIcon />
                           </InputAdornment>
                         ),
                       }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
                         setPassword(event.target.value);
                       }}
                     />
@@ -220,20 +220,22 @@ export default function Register() {
                   <div className='form-input'>
                     <TextField
                       value={confirmPassword}
-                      id="filled-confirmPassword-input"
-                      label="Confirm Password"
-                      type="password"
-                      variant="filled"
+                      id='filled-confirmPassword-input'
+                      label='Confirm Password'
+                      type='password'
+                      variant='filled'
                       className='customTextField'
                       required
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
+                          <InputAdornment position='start'>
                             <PasswordIcon />
                           </InputAdornment>
                         ),
                       }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
                         setConfirmPassword(event.target.value);
                       }}
                     />
@@ -245,16 +247,16 @@ export default function Register() {
                 <div className='form-input'>
                   <TextField
                     value={address1}
-                    id="filled-address1-input"
-                    label="Address Line 1"
-                    type="address"
-                    autoComplete="current-address"
-                    variant="filled"
+                    id='filled-address1-input'
+                    label='Address Line 1'
+                    type='address'
+                    autoComplete='current-address'
+                    variant='filled'
                     className='customTextField'
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <LocationOnIcon />
                         </InputAdornment>
                       ),
@@ -267,15 +269,15 @@ export default function Register() {
                 <div className='form-input'>
                   <TextField
                     value={address2}
-                    id="filled-address2-input"
-                    label="Address Line 2"
-                    type="address"
-                    autoComplete="current-address"
-                    variant="filled"
+                    id='filled-address2-input'
+                    label='Address Line 2'
+                    type='address'
+                    autoComplete='current-address'
+                    variant='filled'
                     className='customTextField'
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
+                        <InputAdornment position='start'>
                           <LocationOnIcon />
                         </InputAdornment>
                       ),
@@ -303,7 +305,9 @@ export default function Register() {
                           </InputAdornment>
                         ),
                       }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
                         setCity(event.target.value);
                       }}
                     />
@@ -325,33 +329,39 @@ export default function Register() {
                           </InputAdornment>
                         ),
                       }}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
                         setProvince(event.target.value);
                       }}
                     />
                   </div>
                 </div>
                 <div className='button-container'>
-                  <Button className="login-button"
-                    variant='contained' size='large'
-                    onClick={handleRegister}>
+                  <Button
+                    className='login-button'
+                    variant='contained'
+                    size='large'
+                    onClick={handleRegister}
+                  >
                     Register
                   </Button>
                 </div>
                 <div className='bottomText'>
-                  <h5>Already Registered? <NavLink className='link' to='/login'> Login  </NavLink></h5>
+                  <h5>
+                    Already Registered?{' '}
+                    <NavLink className='link' to='/login'>
+                      {' '}
+                      Login{' '}
+                    </NavLink>
+                  </h5>
                 </div>
               </div>
-
-
             </form>
           </div>
-
         </div>
-
-
       </Container>
-      <img className="pizza-bg" src='/pizza-2.png' alt="pizza-bg2" />
+      <img className='pizza-bg' src='/pizza-2.png' alt='pizza-bg2' />
     </div>
   );
 }
