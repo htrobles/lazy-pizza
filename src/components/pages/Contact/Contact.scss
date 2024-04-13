@@ -1,142 +1,148 @@
 .contact {
-    height: calc(100vh - 160px);
+  height: calc(100vh - 160px);
+
+  h1 {
+    color: rgba(225, 92, 49, 0.9);
+    margin: 0;
+    font-family: 'Bebas Neue';
+    font-size: 180px;
+    font-weight: bold;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 22px;
+  }
+
+  .contact-subhead {
+    margin-bottom: 120px;
+  }
+
+  .orangeBox {
+    background-color: rgba(225, 92, 49, 0.9);
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .contact-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .contact-info {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .contact-form {
+      position: relative;
+
+      input {
+        width: 80%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: none;
+      }
+      textarea {
+        width: 80%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: none;
+        height: 200px;
+      }
+
+      button {
+        background-color: #fff;
+        color: #282828;
+        border-radius: 10px;
+        margin-top: 20px;
+        padding: 10px 50px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        font-family: 'Montserrat';
+        font-size: 20px;
+        border: none;
+      }
+
+      img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 250px;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    height: auto;
 
     h1 {
-        color: rgba(225, 92, 49, 0.9);
-        margin: 0;
-        font-family: 'Bebas Neue';
-        font-size: 180px;
-        font-weight: bold;
+      font-size: 90px;
     }
 
     h2 {
-        margin: 0;
-        font-family: 'Montserrat';
-        font-size: 40px;
+      font-size: 20px;
     }
 
     p {
-        font-size: 22px;
+      font-size: 11px;
     }
+
     .orangeBox {
-        background-color: rgba(225, 92, 49, 0.9);
-        padding: 20px;
-        border-radius: 20px;
-        position: relative;
-        max-width: 1000px;
-        margin: auto;
-        margin-top: 20px; 
-        min-height: 500px; 
+      margin-top: 20px;
+    }
+
+    .contact-subhead {
+      margin-bottom: 20px;
     }
 
     .contact-section {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-        align-items: flex-start;
+      flex-direction: column;
 
-        .contact-info {
-            flex: 1;
-            margin-right: 20px;
+      .contact-info,
+      .contact-form {
+        margin-right: 0;
+        width: 100%;
+        input {
+          width: 100%;
         }
-
-        .contact-form {
-            position: relative; 
-
-            input {
-                width: 80%;
-                border-radius: 10px;
-                margin-bottom: 10px;
-                padding: 10px;
-                border: none;
-
-            }
-            textarea{
-                width: 80%;
-                border-radius: 10px;
-                margin-bottom: 10px;
-                padding: 10px;
-                border: none;
-                height: 200px;
-            }
-
-            button {
-                background-color: #fff;
-                color: #282828;
-                border-radius: 10px;
-                margin-top: 20px;
-                padding: 10px 50px;
-                cursor: pointer;
-                text-align: center;
-                font-weight: bold;
-                font-family: 'Montserrat';
-                font-size: 20px;
-                border: none;
-            }
-
-            img {
-                position: absolute;
-                top: 0; 
-                right: 0; 
-                width: 250px;
-            }
-
+        textarea {
+          width: 100%;
         }
+      }
+
+      button {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      textarea {
+        height: 200px;
+      }
+
+      .contact-form {
+        img {
+          position: absolute;
+          right: 10px;
+          top: -50px;
+          width: 130px;
+        }
+      }
+
+      button {
+        padding: 10px 30px;
+        font-size: 16px;
+      }
     }
-    @media (max-width: 768px) {
-        height: auto;
-        padding: 20px;
-        h1 {
-            font-size: 90px;
-        }
-
-        h2 {
-            font-size: 20px;
-        }
-
-        p {
-            font-size: 11px;
-        }
-        
-
-        .contact-section {
-            flex-direction: column;
-
-            .contact-info,
-            .contact-form {
-                margin-right: 0;
-                width: 100%;
-                input{
-                    width: 100%;
-                }
-                textarea{
-                    width: 100%;
-                }
-            }
-
-            button {
-                width: 100%;
-                margin-left: 0;
-                margin-right: 0;
-            }
-            textarea{
-                
-                height: 200px;
-            }
-
-            .contact-form {
-                img {
-                    position: absolute;
-                    right: 10px;
-                    top: -50px;
-                    width: 130px;
-                }
-            }
-
-            button {
-                padding: 10px 30px;
-                font-size: 16px;
-            }
-        }
-    }
+  }
 }
