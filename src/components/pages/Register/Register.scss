@@ -1,203 +1,198 @@
 .register {
-    height: calc(100vh - 160px);
-    overflow-y: hidden;
-    overflow-x: hidden;
+  //   height: calc(100vh - 160px);
+  position: relative;
+  margin: 0 auto;
+  .orangeBox {
+    background-color: rgba(225, 92, 49, 0.9);
+    height: fit-content;
+    //max-height: 500px;
+    max-width: 950px;
+    border-radius: 16px;
     position: relative;
-    margin: 0 auto; 
-    .orangeBox {
-        background-color: rgba(225, 92, 49, 0.9);
-        height: fit-content;
-        //max-height: 500px;
-        max-width: 950px;
-        border-radius: 16px;
-        position: relative;
-        padding: 20px;
-        margin: 0 auto; 
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  .header {
+    margin-top: 10px;
+
+    h1 {
+      margin: 0;
+      font-family: 'Bebas Neue';
+      font-size: 50px;
+    }
+  }
+
+  .subHeader {
+    margin-top: 0px;
+
+    h4 {
+      margin: 0;
+    }
+  }
+
+  .pizzaIcon {
+    width: 30vw;
+    max-width: 380px;
+    z-index: +1;
+    position: fixed;
+    top: 0px;
+    right: -8vw;
+  }
+
+  .bottomText {
+    margin-top: 16px;
+    align-content: center;
+    justify-content: center;
+
+    h5 {
+      margin: 0;
+      align-items: center;
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
+  .form {
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+
+    .form-input {
+      max-width: 100%;
     }
 
-    .header {
-        margin-top: 10px;
+    .login-button {
+      align-self: center;
+      margin-top: 20px;
+      width: 80%;
+      background-color: white;
+      border-bottom: 2px solid black;
+      color: #e15c31;
+      font-family: 'Montserrat';
+      font-weight: 800;
+      font-size: 16px;
 
-        h1 {
-            margin: 0;
-            font-family: 'Bebas Neue';
-            font-size: 50px;
-        }
+      &:hover {
+        background-color: black;
+        border-bottom: 2px solid white;
+        letter-spacing: 4px;
+      }
     }
 
-    .subHeader {
-        margin-top: 0px;
+    .link {
+      color: white;
+      font-weight: 400;
+      text-decoration: underline;
 
-        h4 {
-            margin: 0;
-        }
+      &:hover {
+        color: black;
+        letter-spacing: 4px;
+      }
     }
+  }
 
-    .pizzaIcon {
-        width: 30vw;
-        max-width: 380px;
-        z-index: +1;
-        position: absolute;
-        top: 0px;
-        right: -8vw;
+  .pizza-bg {
+    position: fixed;
+    top: 50vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    height: 100vh;
+  }
+
+  .orangeBox {
+    margin: 0 auto;
+  }
+  .pizzaIcon {
+    width: 150px;
+    z-index: +1;
+    position: absolute;
+    top: +10px;
+    right: +20px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+
+    .form-left,
+    .form-right {
+      flex: 1;
+      margin: 4px;
+      .form-input-cp,
+      .form-input-password {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-input {
+        margin: 4px;
+        max-width: 100%;
+      }
     }
+  }
 
-    .bottomText {
-        margin-top: 16px;
-        align-content: center;
-        justify-content: center;
-
-        h5 {
-            margin: 0;
-            align-items: center;
-            text-align: center;
-            font-weight: 600;
-        }
-    }
+  @media (min-width: 768px) {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .form {
-        justify-content: center;
-        align-content: center;
-        text-align: center;
+      display: flex;
+      flex-direction: row;
+      margin-top: 20px;
+      margin-bottom: 20px;
 
-        .form-input{
-            max-width: 100%;
+      .form-left {
+        flex: 1;
+        margin-top: 0;
+
+        .form-input-password {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+
+          .form-input {
+            flex: 1;
+            margin: 0 5px;
+            width: 50%;
+          }
         }
 
-        .login-button {
-            align-self: center;
-            margin-top: 20px;
-            width: 80%;
-            background-color: white;
-            border-bottom: 2px solid black;
-            color: #E15C31;
-            font-family: 'Montserrat';
-            font-weight: 800;
-            font-size: 16px;
+        .form-input {
+          margin: 6px 6px;
+        }
+      }
 
-            &:hover {
-                background-color: black;
-                border-bottom: 2px solid white;
-                letter-spacing: 4px;
-            }
+      .form-right {
+        flex: 1;
+        margin-top: 30px;
+
+        .form-input-cp {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+
+          .form-input {
+            flex: 1;
+            margin: 0 5px;
+            width: 50%;
+          }
         }
 
-        .link {
-            color: white;
-            font-weight: 400;
-            text-decoration: underline;
-
-            &:hover {
-                color: black;
-                letter-spacing: 4px;
-            }
+        .form-input {
+          margin: 6px 6px;
         }
+      }
     }
 
     .pizza-bg {
-        z-index: -1;
-        height: 140vh;
-        position: absolute;
-        top: 0%;
-        left: 50%;
-        transform: translateX(-50%);
+      top: 80px;
+      left: 25vw;
     }
-
-    @media (min-width: 768px) {
-        .register {
-            height: fit-content;
-            overflow-y: auto;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: row;
-            margin-top: 20px;
-            margin-bottom: 20px;
-
-            .form-left {
-                flex: 1;
-                margin-top: 0;
-
-                .form-input-password {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    .form-input {
-                        flex: 1;
-                        margin: 0 5px;
-                        width: 50%;
-                    }
-                }
-
-                .form-input {
-                    margin: 6px 6px;
-                }
-            }
-
-            .form-right {
-                flex: 1;
-                margin-top: 30px;
-
-                .form-input-cp {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    .form-input {
-                        flex: 1;
-                        margin: 0 5px;
-                        width: 50%;
-                    }
-                }
-
-                .form-input {
-                    margin: 6px 6px;
-                }
-
-            }
-        }
-    }
-
-    @media (max-width: 768px) {
-        .register {
-            height: fit-content;
-            overflow-y: auto;
-        }
-        .orangeBox {
-            margin: 0 auto;
-        }
-        .pizzaIcon {
-            width: 150px;
-            z-index: +1;
-            position: absolute;
-            top: +10px;
-            right: +20px;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-
-            .form-left,
-            .form-right {
-                flex: 1;
-                margin: 4px;
-                .form-input-cp,
-                .form-input-password {
-                    display: flex;
-                    flex-direction: column;
-                }
-                
-                .form-input {
-                    margin: 4px;
-                    max-width: 100%;
-                }
-            }
-
-        }
-    }
+  }
 }
