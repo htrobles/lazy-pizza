@@ -4,8 +4,8 @@ import Container from '../../common/Container';
 
 export default function Contact() {
   return (
+      <div className='contact'>
         <Container>
-          <div className='contact'>
             <div className="contact-section">
                 {/* CONTACT INFO */}
                 <div className="contact-info">
@@ -43,8 +43,8 @@ export default function Contact() {
                 </form>
               </div>
             </div>
-          </div>
         </Container>
+      </div>
   )
     
   
