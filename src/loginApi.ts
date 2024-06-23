@@ -1,7 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  Auth, UserCredential, signOut,
+  signOut,
 } from 'firebase/auth';
 import {
   collection,
@@ -17,7 +17,7 @@ import { User } from './types';
 
 const usersCollection = collection(db, 'users');
 
-export const loginUser = async (input: { email: string, password: string }) => {
+export const loginUser = async (input: { email: string; password: string }) => {
   const { email, password } = input;
 
   try {
@@ -37,19 +37,27 @@ export const loginUser = async (input: { email: string, password: string }) => {
 };
 
 export const registerUser = async (input: {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  contact: string,
-  address1: string,
-  address2: string,
-  city: string,
-  province: string,
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  contact: string;
+  address1: string;
+  address2: string;
+  city: string;
+  province: string;
 }) => {
   try {
     const {
-      firstName, lastName, email, password, contact, address1, address2, city, province,
+      firstName,
+      lastName,
+      email,
+      password,
+      contact,
+      address1,
+      address2,
+      city,
+      province,
     } = input;
 
     const userRef = doc(db, 'users', email);
@@ -62,7 +70,7 @@ export const registerUser = async (input: {
     const { user: newUser } = await createUserWithEmailAndPassword(
       auth,
       email,
-      password,
+      password
     );
 
     if (newUser) {
@@ -77,7 +85,8 @@ export const registerUser = async (input: {
         province,
       });
     }
-  } catch (error: any) { // explicitly type the error parameter
+  } catch (error: any) {
+    // explicitly type the error parameter
     let messageOutput;
 
     if (error.code === 'auth/email-already-in-use') {
@@ -97,17 +106,17 @@ export const fetchUser = async (email: string): Promise<User | null> => {
   if (!userDoc.exists()) {
     return null; // Return null if the document does not exist
   }
-  
-  const userData = userDoc.data(); 
+
+  const userData = userDoc.data();
 
   const user: User = {
     email,
-    firstName: userData.firstName || '', 
-    lastName: userData.lastName || '', 
-    contact: userData.contact || '', 
-    address1: userData.address1 || '', 
-    address2: userData.address2 || '', 
-    city: userData.city || '', 
+    firstName: userData.firstName || '',
+    lastName: userData.lastName || '',
+    contact: userData.contact || '',
+    address1: userData.address1 || '',
+    address2: userData.address2 || '',
+    city: userData.city || '',
     province: userData.city || '',
   };
 
@@ -124,19 +133,17 @@ export const logoutUser = async (): Promise<void> => {
 };
 
 export const updateUser = async (input: {
-  email: string,
-  firstName: string,
-  lastName:string,
-  contact: string,
-  address1: string,
-  address2: string,
-  city: string,
-  province: string,
+  email: string;
+  firstName: string;
+  lastName: string;
+  contact: string;
+  address1: string;
+  address2: string;
+  city: string;
+  province: string;
 }): Promise<void> => {
   try {
-    const {
-      email, firstName, lastName, contact, address1, address2, city, province,
-    } = input;
+    const { email } = input;
     const userRef = doc(db, 'users', email);
     await setDoc(userRef, input, { merge: true });
   } catch (error) {
